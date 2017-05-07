@@ -1,0 +1,2 @@
+rclone mkdir adrive:000-owncloud
+rclone sync --one-file-system --exclude cache --exclude node_modules /Users/hack adrive:000-owncloud

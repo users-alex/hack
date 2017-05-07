@@ -1,0 +1,1 @@
+aws --region us-east-1 ec2 describe-images --owner amazon

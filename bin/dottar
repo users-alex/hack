@@ -1,0 +1,33 @@
+FILE=dotfiles-`whoami`.tgz
+
+export BACKUPS="
+.aws
+.bash_profile
+.bashrc
+.bash_env
+.bluemix
+.code-push*
+.config
+.composer
+.cf
+.gitconfig
+.gitignore
+.gnupg
+.profile
+.pyenvrc
+.rclone.conf
+.rvmrc
+.s3cfg
+.secrets
+.ssh
+.vimrc
+.zshrc
+.acdbackup
+README.md
+"
+
+echo "creating ${FILE}"
+mkdir -p ~/private
+( cd ~;tar zHcf ~/private/$FILE $BACKUPS)
+
+(cd ~/private;~/bin/enc $FILE)

@@ -1,0 +1,4 @@
+[ ! -z $1 ] && REPO=$1
+[ ! -z $2 ] && TAG=$2
+
+git clone ${REPO} --branch ${TAG} --single-branch

@@ -1,0 +1,1 @@
+/usr/local/bin/sshfs zhome@192.168.0.5: /Users/hack/fuse/zhome

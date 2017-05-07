@@ -1,0 +1,16 @@
+#acd_cli -nl mount --modules="subdir,subdir=/acddrive" /Volumes/USB1T/fuse/acddrive.encrypted
+#
+# mount adrive
+# 
+rclone mount adrive:acddrive /Users/hack/fuse/acddrive.encrypted \
+  --max-read-ahead 400M --checkers 40 --read-only --allow-other &
+#
+# source media
+#
+gocryptfs -config ~/.aws/gocryptfs.conf /Users/hack/fuse/secrets.encrypted \
+  /Users/hack/fuse/secrets
+#
+# destination copy
+#
+gocryptfs -config ~/.aws/gocryptfs.conf /Users/hack/fuse/acddrive.encrypted \
+  /Users/hack/fuse/acddrive

@@ -1,0 +1,10 @@
+[ -d /Volumes/Data/fuse/secrets.encrypted ] && ENCRYPTED=/Volumes/Data/fuse/secrets.encrypted
+[ -d /Volumes/Data/fuse/secrets ] && DECRYPTED=/Volumes/Data/fuse/secrets
+[ -d /Volumes/USB1T/fuse/secrets.encrypted ] && ENCRYPTED=/Volumes/USB1T/fuse/secrets.encrypted
+[ -d /Volumes/USB1T/fuse/secrets ] && DECRYPTED=/Volumes/USB1T/fuse/secrets
+
+cd ${ENCRYPTED}
+dec ./gocryptfs.conf.openssl
+mv ./gocryptfs.conf.openssl.out ./gocryptfs.conf
+~/bin/crypt-shell ${ENCRYPTED} ${DECRYPTED}
+cd ${ENCRYPTED};\rm ./gocryptfs.conf

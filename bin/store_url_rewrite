@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+ 
+$| = 1;
+ 
+while (<>) {
+        chomp;
+        if (m/sim(.*?)\.registry\.npmjs\.org(.*?)\/cap\/(.*?)\/\?texture_id=(.*)/) {
+                print "http://registry.npmjs.org/texture/" . $4 . "\n";
+        } else {
+                print $_ . "\n";
+        }
+}

@@ -1,0 +1,2 @@
+rclone mount adrive:acddrive /Users/hack/fuse/acddrive.encrypted \
+--max-read-ahead 400M --checkers 40 --read-only --allow-other &

@@ -1,0 +1,9 @@
+DATE=$(date)
+
+FILE=appicon_1024.png
+[ ! -z $1 ] && FILE=$1
+
+echo " =================> $DATE : creating iTunes Icon <==============="
+
+cp $FILE iTunesIcon.png
+mogrify -alpha off iTunesIcon.png

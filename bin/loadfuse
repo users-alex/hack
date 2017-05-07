@@ -1,0 +1,1 @@
+test -e /dev/osxfuse0 || /Library/Filesystems/osxfuse.fs/Contents/Resources/load_osxfuse

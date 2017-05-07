@@ -1,0 +1,2 @@
+/usr/local/sbin/squid -f /Users/zhome/.ssh/squid.conf
+#tail -f /usr/local/squid/var/logs/access.log

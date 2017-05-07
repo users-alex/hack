@@ -1,0 +1,3 @@
+umount /Users/hack/fuse/acddrive.encrypted 
+umount /Users/hack/fuse/secrets.encrypted
+umount adrive:acddrive

@@ -1,0 +1,3 @@
+pip3 install --upgrade git+https://github.com/bgemmill/acd_cli.git@master
+sqlite3 $HOME/Library/Caches/acd_cli/nodes.db  'CREATE INDEX ix_parentage_child ON parentage(child);'
+

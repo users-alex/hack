@@ -1,0 +1,4 @@
+brew install openssl --force
+brew link openssl
+CGO_CFLAGS="-I/usr/local/opt/openssl/include" CGO_LDFLAGS="-L/usr/local/opt/openssl/lib" go get -v github.com/rfjakob/gocryptfs
+

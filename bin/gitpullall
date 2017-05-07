@@ -1,0 +1,1 @@
+for fff in *; do ( cd $fff;git stash;git pull); done

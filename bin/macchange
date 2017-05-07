@@ -1,0 +1,9 @@
+MAC=`openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'`
+MAC="00:1C:C2:17:B2:F2"
+# hisense 225 Lee TV
+MAC="74:DF:BF:BD:02:96"
+# Build in wifi
+MAC="00:88:65:43:25:1e"
+[ ! -z $1 ] && MAC=$1
+echo "sudo ifconfig en0 ether $MAC"
+sudo ifconfig en0 ether $MAC
