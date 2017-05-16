@@ -1,0 +1,4 @@
+ARG1='dependencies'
+[ $1 ] && ARG1=$1
+
+python3 -c "import sys, json; print(json.load(sys.stdin)['dependencies'])"

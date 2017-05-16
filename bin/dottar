@@ -6,15 +6,12 @@ export BACKUPS="
 .bashrc
 .bash_env
 .bluemix
-.code-push*
 .config
 .composer
 .cf
 .gitconfig
 .gitignore
 .gnupg
-.gradle/pointlook-release-key.keystore
-.gradle/gradle.properties
 .profile
 .pyenvrc
 .rclone.conf
@@ -24,6 +21,7 @@ export BACKUPS="
 .ssh
 .vimrc
 .zshrc
+.acdbackup
 README.md
 "
 

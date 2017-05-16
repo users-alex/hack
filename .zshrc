@@ -10,7 +10,9 @@ export ZSH=~/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ---> themes for zshell <---
 #ZSH_THEME="random"
-ZSH_THEME="alex"  # • ॐ  ☮  »  
+#ZSH_THEME="alex"  # • ॐ  ☮  »  
+ZSH_THEME="powerlevel9k/powerlevel9k"
+#POWERLEVEL9K_MODE='nerdfont-complete'
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -89,5 +91,5 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.profile ] && . ~/.profile
 [ -f ~/.bashrc ] && . ~/.bashrc
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+

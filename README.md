@@ -12,12 +12,18 @@ default template for a OSX user's home account.  Do the following after clone
 ## Added utilities homebrew, nvm, rvm, pyenv, gvm, zsh
 ```
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
 curl -sSL https://get.rvm.io | bash -s stable --rails
 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/guarinogabriel/mac-cli/master/mac-cli/tools/install)"
+
+### bhilburn/powerlevel9k zsh prompt
+git clone https://github.com/bhilburn/powerlevel9k.git
+~/.oh-my-zsh/custom/themes/powerlevel9k
+#### add this to ~.zshrc
+ZSH_THEME="powerlevel9k/powerlevel9k"
 ```
 # install cocoapods
 - [5077:issue with gem update](https://github.com/CocoaPods/CocoaPods/issues/5077)
@@ -40,7 +46,7 @@ brew install binutils coreutils cvs gawk gettext git gnu-sed grep
 brew install help2man libtool make ncurses pkg-config wget
 #
 brew cask install vagrant
-brew cask install keycastr imagemagick
+brew cask install keycastr 
 brew cask install Caskroom/cask/tcl
 brew cask install Caskroom/cask/osxfuse homebrew/fuse/s3-backer \
 homebrew/fuse/s3fs homebrew/fuse/btfs
@@ -54,7 +60,7 @@ brew install $(brew deps owncloud-client)
 # https://amc.ovh/2015/08/14/mounting-uploading-amazon-cloud-drive-encrypted.html
 brew install homebrew/fuse/encfs the_silver_searcher
 brew install gradle squid sarg links yasm libjpeg pil
-brew install freetype libpng libjpeg lua ipfs
+brew install freetype libpng libjpeg lua ipfs ripgrep
 brew install cmake ghc cabal-install boost boost-python
 # [dnsmasq](https://gist.github.com/zhurui1008/48130439a079a3c23920)
 # [clamav](https://gist.github.com/zhurui1008/4fdc875e557014c3a34e)
@@ -62,7 +68,8 @@ brew install clamav dnsmasq dnscrypt-proxy
 # [cf](https://github.com/cloudfoundry/cli)
 brew tap cloudfoundry/tap
 brew install cf-cli
-brew install ccache lzo
+# redux
+brew cask install react-native-debugger
 ```
 brew tap discoteq/discoteq
 brew install flock
@@ -90,7 +97,8 @@ go get github.com/nlf/dlite
 npm install react-native-css -g
 npm install react-native-cli -g
 npm install http-server -g
-npm i -g yarn updtr nodemon npm yo generator-rn-toolbox budo
+npm i -g coffee-script marked jsonlint code-push-cli@1.12.6-beta
+npm i -g yarn updtr nodemon npm brunch regenerator decaffeinate
 ```
 
 V1.0.3
