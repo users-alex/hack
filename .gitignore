@@ -82,6 +82,9 @@
 .mjolnir/
 .z.[0-9]*
 .z
+.ccache/
+.minio/
+.sqlite_history
 .Seagate/
 .Xauthority
 .dbshell
