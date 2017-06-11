@@ -67,6 +67,12 @@
 .iterm2*
 .mix*
 .sh_history
+.azure
+.bash_profile.backup
+.bundle
+.lein
+.m2
+.rncache
 .vscode*
 .acdbackup
 .apiconnect/
@@ -117,3 +123,4 @@ oracle-instant-client/
 private/*z
 private/*t
 private/*r
+azure-cli

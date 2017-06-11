@@ -2,6 +2,7 @@ FILE=dotfiles-`whoami`.tgz
 
 export BACKUPS="
 .aws
+.azure
 .bash_profile
 .bashrc
 .bash_env

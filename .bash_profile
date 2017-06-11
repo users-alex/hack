@@ -5,3 +5,5 @@ export START=$START:bash_profile
 [[ -s "$HOME/.bashrc" ]] && source "$HOME/.bashrc"
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+source '/Users/hack/bin/azure-cli/az.completion'

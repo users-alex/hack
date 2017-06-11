@@ -1,0 +1,2 @@
+#ssh -i "~/.ssh/20170611-aws-pointlook.pem" ubuntu@me.pointlook.com
+ssh alex@me.pointlook.com

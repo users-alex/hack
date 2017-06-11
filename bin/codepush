@@ -1,4 +1,8 @@
-echo "Pointlook-ios deployment key"
+echo "Pointlook-ios7 deployment key"
+    code-push deployment ls Pointlook-ios7 -k
+echo "Pointlook-android7 deployment key"
+    code-push deployment ls Pointlook-android07 -k
+    echo "Pointlook-ios deployment key"
     code-push deployment ls Pointlook-ios -k
 echo "Pointlook-android deployment key"
     code-push deployment ls Pointlook-android -k

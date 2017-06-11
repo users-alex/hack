@@ -1,0 +1,3 @@
+ssh -L 5901:127.0.0.1:5901 -N -f -l alex me.pointlook.com
+ssh alex@me.pointlook.com vncserver
+
