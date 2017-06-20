@@ -99,6 +99,7 @@ npm install react-native-cli -g
 npm install http-server -g
 npm i -g coffee-script marked jsonlint code-push-cli@1.12.6-beta
 npm i -g yarn updtr nodemon npm brunch regenerator decaffeinate
+npm i -g imagemin
 ```
 
 V1.0.3

@@ -1,0 +1,11 @@
+DATE=$(date +%Y%m.%d.%s)
+# default comment
+TAG_VERSION=$(git describe origin/master)
+
+COMMENT="${DATE}:${TAG_VERSION}: comment:"
+
+[ ! -z $1 ] && COMMENT="$COMMENT $1"
+
+git commit "-m $COMMENT"
+echo $TAG_VERSION
+
