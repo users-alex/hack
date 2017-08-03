@@ -101,6 +101,15 @@
 .pm2
 .rncache/
 .zshrc.backup
+.azure/
+.bash_profile.backup
+.bundle/
+.fastlane/
+.itmstransporter/
+.lein/
+.m2/
+.putty/
+azure-cli/
 fuse
 mac-cli
 ALEX
