@@ -95,3 +95,9 @@ source $ZSH/oh-my-zsh.sh
 
 source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Volumes/Data/alex/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Volumes/Data/alex/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Volumes/Data/alex/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Volumes/Data/alex/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

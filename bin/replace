@@ -1,0 +1,1 @@
+find . -type f -name 'build.gradle' -exec sed -i '' s/25.0.0/25.0.2/ {} +

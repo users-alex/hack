@@ -1,0 +1,5 @@
+adb kill-server
+~/Library/Android/sdk/tools/emulator -avd Nexus_6P_API_19 -noaudio -netdelay none -netspeed full &
+#ssh -R 5554:localhost:5554 -N -f -l alex dev.pointlook.com
+#ssh -R 5555:localhost:5555 -N -f -l alex dev.pointlook.com
+

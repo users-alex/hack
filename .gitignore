@@ -98,6 +98,9 @@
 .usage-stats/
 .zprezto/
 .zpreztorc
+.pm2
+.rncache/
+.zshrc.backup
 fuse
 mac-cli
 ALEX
@@ -120,5 +123,4 @@ oracle-instant-client/
 private/*z
 private/*t
 private/*r
-.pm2
 zlaptop.vncloc

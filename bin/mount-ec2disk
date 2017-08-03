@@ -1,0 +1,1 @@
+sshfs alex@dev.pointlook.com:/diskc $HOME/ec2disk
