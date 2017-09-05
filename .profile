@@ -9,7 +9,7 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 [[ -s "$HOME/.nvm/nvm.sh" ]] && source "$HOME/.nvm/nvm.sh"
 
-export PATH="$HOME/bin:$HOME/.pyenv/bin:$PATH:$HOME/.rvm/bin:$HOME/.gvm/bin:$PATH" # Add RVM to PATH for scripting
+export PATH="$HOME/bin:$HOME/.pyenv/bin:$HOME/.rvm/bin:$HOME/.gvm/bin:/usr/local/opt/sqlite/bin:$PATH" # Add RVM to PATH for scripting
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
@@ -42,3 +42,6 @@ fi
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 [[ -s "/Users/zhome/.gvm/scripts/gvm" ]] && source "/Users/zhome/.gvm/scripts/gvm"
+
+[[ -f "/usr/local/etc/bash_completion" ]] && source "/usr/local/etc/bash_completion"
+
