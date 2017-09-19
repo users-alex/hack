@@ -100,6 +100,7 @@ npm install http-server -g
 npm i -g coffee-script marked jsonlint code-push-cli@1.12.6-beta
 npm i -g yarn updtr nodemon npm brunch regenerator decaffeinate
 npm i -g imagemin
+npm i -g react-native-git-upgrade react-native-rename
 ```
 
 V1.0.3
