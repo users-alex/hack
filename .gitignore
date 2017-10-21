@@ -112,6 +112,12 @@
 .zsh-update
 .zsh_history
 .zshrc.backup
+.bosh_config
+.distcc
+.electron-gyp
+.mc
+.ngrok2
+.rncache
 ALEX
 Applications
 Desktop

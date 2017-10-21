@@ -1,0 +1,8 @@
+#[ -z $1 ] && exit
+[ $# -lt 3 ] && (echo 'usage: gitclonetag TAG REPO DEST';exit)
+TAG=$1 
+REPO=$2
+DEST=$3
+git clone -b ${TAG} --single-branch --depth 1 ${REPO} ${DEST}
+#
+#https://pointlook@bitbucket.org/develpl/v5-example.git v5-example-007

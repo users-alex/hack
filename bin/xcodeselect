@@ -1,0 +1,5 @@
+[ -z $1 ] && exit
+VERSION=$1
+
+sudo xcode-select --switch /Applications/${VERSION}/Xcode.app
+xcode-select -p

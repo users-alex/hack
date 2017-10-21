@@ -1,0 +1,1 @@
+( cd ~/bin/cloudExplorer;java -jar cloudExplorer.jar )
