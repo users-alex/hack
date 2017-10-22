@@ -118,6 +118,10 @@
 .mc
 .ngrok2
 .rncache
+.bosh
+.bosh_virtualbox_cpi
+.ccache
+.ngrok
 ALEX
 Applications
 Desktop

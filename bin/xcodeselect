@@ -1,5 +1,16 @@
-[ -z $1 ] && exit
-VERSION=$1
+#!/bin/sh
+ 
+# We need to know which version to use
+if [ $# -ne 1 ]
+then
+  echo "\nUsage:  ./`basename $0` Version\n"Example: ./`basename $0` xcode7\\n
+  exit 
+fi
+ 
+# Select Xcode version
+sudo xcode-select --switch /Applications/$1/Xcode.app/Contents/Developer
+ 
+echo 'Current Xcode build path:'
+xcode-select --print-path
 
-sudo xcode-select --switch /Applications/${VERSION}/Xcode.app
-xcode-select -p
+exit 0
