@@ -1,0 +1,1 @@
+sshfs zhome@prod.usertoken.com:/netdisk/shared/work /Users/zhome/fuse/sshfs
