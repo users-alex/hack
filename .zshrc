@@ -12,8 +12,8 @@ alias mmv='noglob zmv -W'
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ---> themes for zshell <---
 #ZSH_THEME="random"
-#ZSH_THEME="alex"  # • ॐ  ☮  »  
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="alex"  # • ॐ  ☮  »  
+#ZSH_THEME="powerlevel9k/powerlevel9k"
 #POWERLEVEL9K_MODE='nerdfont-complete'
 
 # Uncomment the following line to use case-sensitive completion.
@@ -93,7 +93,20 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.profile ] && . ~/.profile
 [ -f ~/.bashrc ] && . ~/.bashrc
 
-source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+[ -f ~/.zprezto/init.zsh ] && source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+
+# ref : http://tychoish.com/post/9-awesome-ssh-tricks/
+ssh-reagent () {
+  for agent in /tmp/ssh-*/agent.*; do
+      export SSH_AUTH_SOCK=$agent
+      if ssh-add -l 2>&1 > /dev/null; then
+         echo Found working SSH Agent:
+         ssh-add -l
+         return
+      fi
+  done
+  echo Cannot find ssh agent - maybe you should reconnect and forward it?
+}
 
 
 # The next line updates PATH for the Google Cloud SDK.

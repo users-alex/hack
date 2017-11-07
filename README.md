@@ -18,7 +18,9 @@ curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-
 bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/guarinogabriel/mac-cli/master/mac-cli/tools/install)"
-
+### zepto zsh framework management
+git clone --recursive https://github.com/sorin-ionescu/prezto.git
+"${ZDOTDIR:-$HOME}/.zprezto"
 ### bhilburn/powerlevel9k zsh prompt
 git clone https://github.com/bhilburn/powerlevel9k.git
 ~/.oh-my-zsh/custom/themes/powerlevel9k
