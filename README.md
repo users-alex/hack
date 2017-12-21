@@ -12,7 +12,7 @@ default template for a OSX user's home account.  Do the following after clone
 ## Added utilities homebrew, nvm, rvm, pyenv, gvm, zsh
 ```
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 curl -sSL https://get.rvm.io | bash -s stable --rails
 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
@@ -26,6 +26,9 @@ git clone https://github.com/bhilburn/powerlevel9k.git
 ~/.oh-my-zsh/custom/themes/powerlevel9k
 #### add this to ~.zshrc
 ZSH_THEME="powerlevel9k/powerlevel9k"
+### update fonts
+brew tap caskroom/fonts
+brew cask install font-hack-nerd-font
 ```
 # install cocoapods
 - [5077:issue with gem update](https://github.com/CocoaPods/CocoaPods/issues/5077)
