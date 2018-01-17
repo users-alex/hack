@@ -6,7 +6,6 @@ export BACKUPS="
 .bash_profile
 .bashrc
 .bash_env
-.bluemix
 .config
 .composer
 .cf
