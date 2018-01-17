@@ -36,6 +36,7 @@
 .electron/
 .emulator*
 .fastlane/
+.flow-typed
 .forever/
 .fseventsd
 .gem
@@ -134,6 +135,7 @@ Pictures
 Public
 VirtualBox*
 azure-cli/
+archive
 fuse
 mac-cli
 oracle-instant-client/
