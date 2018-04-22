@@ -1,0 +1,8 @@
+export HOST=54.219.138.105
+ssh -i Downloads/data_lab_admin_ncal.pem -L 5901:127.0.0.1:5901 -N -f -l ubuntu ${HOST}
+ssh -i Downloads/data_lab_admin_ncal.pem -L 5902:127.0.0.1:5902 -N -f -l ubuntu ${HOST}
+ssh -i Downloads/data_lab_admin_ncal.pem -L 5903:127.0.0.1:5903 -N -f -l ubuntu ${HOST}
+ssh -i Downloads/data_lab_admin_ncal.pem -L 5904:127.0.0.1:5904 -N -f -l ubuntu ${HOST}
+ssh -i Downloads/data_lab_admin_ncal.pem -L 5905:127.0.0.1:5905 -N -f -l ubuntu ${HOST}
+ssh -i Downloads/data_lab_admin_ncal.pem -L 5906:127.0.0.1:5906 -N -f -l ubuntu ${HOST}
+ssh -i Downloads/data_lab_admin_ncal.pem -L 5907:127.0.0.1:5907 -N -f -l ubuntu ${HOST}

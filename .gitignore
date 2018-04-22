@@ -123,6 +123,13 @@
 .bosh_virtualbox_cpi
 .ccache
 .ngrok
+.IdentityService/
+.ServiceHub/
+.bitmonero
+.electrum/
+.ethash
+.mono/
+.swfinfo
 ALEX
 Applications
 Desktop
@@ -140,11 +147,9 @@ fuse
 mac-cli
 oracle-instant-client/
 ownCloud
-private/*r
-private/*t
-private/*z
 share
 src
 tmp
 work/
 zlaptop.vncloc
+private

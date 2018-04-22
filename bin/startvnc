@@ -1,5 +1,5 @@
 # xterm
-ssh -L 5901:127.0.0.1:5901 -N -f -l alex dev.pointlook.com
+ssh -L 5901:127.0.0.1:5901 -N -f -l wallet001 dev.alex2006hw.com
 # forward this emulator to server
 #ssh -R 5554:localhost:5554 -N -f -l alex dev.pointlook.com
 #ssh -R 5555:localhost:5555 -N -f -l alex dev.pointlook.com
