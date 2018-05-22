@@ -1,1 +1,1 @@
-ssh alex@smtp.clouderg.com
+ssh -A alex@smtp.clouderg.com

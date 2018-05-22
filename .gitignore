@@ -104,6 +104,8 @@
 .wapi*
 .wget-hsts
 .wskprops
+.dotnet
+.yubikey
 .yarn*
 .z
 .z.[0-9]*

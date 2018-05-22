@@ -19,6 +19,7 @@ export BACKUPS="
 .s3cfg
 .secrets
 .ssh
+.yubikey
 .vimrc
 .zshrc
 .acdbackup
