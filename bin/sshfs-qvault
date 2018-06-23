@@ -1,0 +1,1 @@
+sshfs alex@qvault-dev01.westus.cloudapp.azure.com:/netdisk/work $HOME/fuse/sshfs
