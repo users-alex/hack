@@ -1,0 +1,37 @@
+echo deb http://ppa.launchpad.net/bitcoin/bitcoin/ubuntu xenial main | sudo tee /etc/apt/sources.list.d/docker.list
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D46F45428842CE5E
+sudo apt-get update
+sudo apt-get -y install ccache git libboost-system1.58.0 libboost-filesystem1.58.0 libboost-program-options1.58.0 libboost-thread1.58.0 libboost-chrono1.58.0 \
+  libssl1.0.0 libevent-pthreads-2.0-5 libevent-2.0-5 build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev  \
+  bsdmainutils libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev \
+  libdb4.8-dev libdb4.8++-dev libminiupnpc-dev libzmq3-dev libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev \
+  protobuf-compiler libqrencode-dev python-pip libboost-all-dev libsodium-dev
+#
+sudo apt-get install -y  build-essential  automake autoconf pkg-config libcurl4-openssl-dev libjansson-dev libssl-dev libgmp-dev make g++ \
+  cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev \
+  libcurl4-openssl-dev libgtest-dev libreadline-dev libminiupnpc-dev libzmq3-dev libmicrohttpd-dev libssl-dev \
+  libhwloc-dev libuv1-dev libseccomp-dev libcap-dev qtdeclarative5-dev qml-module-qtquick-controls qttools5-dev-tools
+sudo apt-get install -y --no-install-recommends -y gcc-multilib g++-multilib mono-complete mono-devel
+sudo apt-get install -y libc++-dev
+sudo apt-get install -y ocl-icd-opencl-dev 
+sudo apt-get install -y nvidia-cuda-dev 
+sudo pip install construct==2.5.2 scrypt
+
+git clone https://github.com/lhartikk/xcoin-hash.git
+cd xcoin-hash;sudo python setup.py install
+git clone https://github.com/sherlockcoin/X13-PythonHash.git
+cd X13-PythonHash;sudo python setup.py install
+git clone https://github.com/minings/x15_hash.git
+cd x15_hash;sudo python setup.py install
+git clone https://github.com/Neisklar/quarkcoin-hash-python.git
+cd quarkcoin-hash-python;sudo python setup.py install
+sudo \rm -rf xcoin-hash X13-PythonHash x15_hash quarkcoin-hash-python
+
+wget http://download.oracle.com/berkeley-db/db-4.8.30.zip
+unzip db-4.8.30.zip;rm db-4.8.30.zip
+cd db-4.8.30
+cd build_unix/
+../dist/configure --prefix=/usr/local --enable-cxx
+MAKEFLAGS='-j$(nproc) -l$(nproc)' make
+sudo make install
+sudo rm -rf ~/db-4.8.30 ~/xcoin-hash

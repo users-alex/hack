@@ -1,0 +1,1 @@
+sshfs alex@dev01.usertoken.com:/home/alex/work/usertoken/current /Users/hack/ec2disk

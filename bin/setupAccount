@@ -1,0 +1,46 @@
+#
+# account setup
+#
+CACHEDIR=`date +%s | md5 | base64 | head -c 32 ; echo`
+\rm -rf ~/.cache;\rm -rf /tmp/${CACHEDIR}/cache;mkdir -p /tmp/${CACHEDIR}/cache;ln -s /tmp/${CACHEDIR}/cache ~/.cache
+# install nvm
+\rm -rf ~/.npm;mkdir -p ~/.cache/npm;ln -s ~/.cache/npm ~/.npm
+\rm -rf ~/.node-gyp;mkdir -p ~/.cache/node-gyp;ln -s ~/.cache/node-gyp ~/.node-gyp
+\rm -rf ~/.ccache;mkdir -p ~/.cache/ccache;ln -s ~/.cache/ccache ~/.ccache
+\rm -rf ~/.bitmonero;mkdir -p ~/.cache/bitmonero;ln -s ~/.cache/bitmonero ~/.bitmonero
+# install gvm nvs
+#\rm -rf ~/.nvm;curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash &
+# install nvs
+export NVS_HOME="$HOME/.nvs"
+git clone https://github.com/jasongin/nvs "$NVS_HOME"
+. "$NVS_HOME/nvs.sh" install
+(. "$NVS_HOME/nvs.sh" && nvs add 8.11.4;nvs link 8.11.4;nvs use 8.11.4) &
+# install gvm
+\rm -rf ~/.gvm;bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+\rm -rf ~/.gvm/archive;mkdir -p ~/.cache/gvm/archive;ln -s ~/.cache/gvm/archive ~/.gvm/archive
+(. "${HOME}/.gvm/scripts/gvm" && gvm install go1.11.1 -B && gvm alias delete latest;gvm alias create latest go1.11.1)
+# install xgo
+export GOROOT=~/go
+[ ! -d ${GOROOT} ] && mkdir -p ${GOROOT}
+go get github.com/karalabe/xgo  # go cross compiler
+#wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz
+#tar zxf go1.9.2.linux-amd64.tar.gz;\rm -rf go1.9.2.linux-amd64.tar.gz
+#
+# install vim plug-ins
+\rm -rf ~/.vim;mkdir -p ~/.vim/autoload ~/.vim/bundle 
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim &
+curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh &
+#
+# install doom-emacs in vim mode. maybe edit init.el
+# ( git clone https://github.com/hlissner/doom-emacs ~/.emacs.d && cd ~/.emacs.d && cp init.example.el init.el && make install)
+# install shell plug-ins
+curl https://raw.githubusercontent.com/rupa/z/master/z.sh > ~/.z.sh
+#
+# install Applications
+#
+# \rm -rf ~/Applications;git clone https://github.com/users-alex/applications-linux.git ~/.cache/Applications;ln -s ~/.cache/Applications ~/Applications &
+#
+# install cloud-foundry
+# curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github" | tar -zx
+#  install network emulator tool
+# (cd /tmp;git clone https://github.com/mininet/mininet.git;./mininet/util/install.sh -s ~/mininet -a ) &

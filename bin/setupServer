@@ -1,0 +1,117 @@
+#
+# system setup
+#
+[ -f $HOME/.secrets ] && source "$HOME/.secrets"
+ID=`id -nu`
+#[ -L /home/webhome ] && sudo rm -f /home/webhome &
+#[ -d /home/webhome ] && sudo mv /home/webhome /home/webold && sudo rm -rf /home/webold &
+#sudo ln -s $HOME /home/webhome
+#
+# increase file handles
+#
+echo "fs.inotify.max_user_watches=524288" | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+echo "fs.file-max = 131072" | sudo tee /etc/sysctl.conf && sudo sysctl -p
+echo "session required        pam_unix.so" | sudo tee -a /etc/pam.d/common-session
+echo "session optional        pam_systemd.so" | sudo tee -a /etc/pam.d/common-session
+echo "session required        pam_limits.so" | sudo tee -a /etc/pam.d/common-session
+#
+echo "* soft     nproc          131072" | sudo tee -a /etc/security/limits.conf
+echo "* hard     nproc          131072" | sudo tee -a /etc/security/limits.conf
+echo "* soft     nofile         131072" | sudo tee -a /etc/security/limits.conf
+echo "* hard     nofile         131072" | sudo tee -a /etc/security/limits.conf
+echo "root soft     nproc          131072" | sudo tee -a /etc/security/limits.conf
+echo "root hard     nproc          131072" | sudo tee -a /etc/security/limits.conf
+echo "root soft     nofile         131072" | sudo tee -a /etc/security/limits.conf
+echo "root hard     nofile         131072" | sudo tee -a /etc/security/limits.conf
+#
+echo "DefaultLimitNOFILE=20000" | sudo tee -a /etc/systemd/system.conf
+echo "DefaultLimitNOFILE=20000" | sudo tee -a /etc/systemd/user.conf
+echo "GatewayPorts clientspecified" | sudo tee -a /etc/ssh/sshd_config
+#
+# hold back upgrading kernel in case we are secured boot
+sudo apt-mark hold grub-efi-amd64 grub-efi-amd64-signed
+#
+# install packages
+#
+#curl https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+#curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | sudo apt-key add -
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+#
+#echo "deb http://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+#echo "deb http://packages.cloud.google.com/apt gcsfuse-jessie main" | sudo tee /etc/apt/sources.list.d/gcsfuse.list
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+#echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+#
+sudo apt-get update && sudo apt-get -y upgrade
+#sudo apt-get install -y cf-cli gcsfuse
+sudo apt-get install -y   libreadline6 libreadline6-dev
+sudo apt-get install -y apt-utils screen htop sysstat nmap zsh wamerican python3-pip \
+  libreadline-dev bison apt-transport-https ca-certificates curl software-properties-common \
+  spell ispell pandoc python-pip build-essential python-dev lm-sensors libnotify-bin ccache libevent-dev \
+  fail2ban bison zip unzip libdb-dev libleveldb-dev libsodium-dev zlib1g-dev libtinfo-dev libffi-dev \
+  golang-go libxss1 libgconf-2-4 docker-ce parallel rpm fakeroot libkrb5-dev \
+  restic s3fs libboost-python-dev libboost-thread-dev libbluetooth-dev libglib2.0-dev \
+  libusb-1.0-0-dev libudev-dev autoconf libpng-dev libssl-dev libasound2 libgmp3-dev \
+  postgresql-client-common postgresql-client emacs libc++-dev virtualenv pixz zpaq \
+  php7.2-cli hhvm
+#sudo apt-get install --no-install-recommends -y gcc-multilib g++-multilib mono-complete mono-devel
+sudo pip install --upgrade pip
+sudo usermod -aG docker $(whoami)
+#sudo apt-get install -y  xfce4 xfce4-goodies tightvncserver
+#
+# glances
+#
+sudo pip install psutil logutils bottle batinfo zeroconf netifaces pymdstat influxdb \
+  elasticsearch potsdb statsd pystache docker-py pysnmp pika py-cpuinfo bernhard glances \
+  tahoe-lafs
+sudo pip install https://bitbucket.org/gleb_zhulik/py3sensors/get/tip.tar.gz
+#
+# docker-compose
+#
+sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+#
+# openzwave
+#
+#git clone https://github.com/OpenZWave/open-zwave.git
+#( cd open-zwave && \
+#  CFLAGS=-D_GLIBCXX_USE_CXX11_ABI=0 make && sudo CFLAGS=-D_GLIBCXX_USE_CXX11_ABI=0 make install && \
+#sudo ldconfig )
+#rm -rf open-zwave
+
+#
+# ipfs
+#
+#export GOPATH=$HOME/go
+#export PATH=$PATH:$GOROOT/bin:$GOPATH/
+#wget https://dist.ipfs.io/go-ipfs/v0.4.14/go-ipfs_v0.4.14_linux-amd64.tar.gz
+#tar xvfz go-ipfs_v0.4.14_linux-amd64.tar.gz
+#sudo mv go-ipfs/ipfs /usr/local/bin/ipfs
+#\rm -rf go-ipfs_v0.4.14_linux-amd64.tar.gz* go-ipfs &
+#
+#/usr/local/bin/ipfs init
+#/usr/local/bin/ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/8080
+#/usr/local/bin/ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
+#/usr/local/bin/ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", "POST"]'
+#/usr/local/bin/ipfs config --json Gateway.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
+#/usr/local/bin/ipfs config --json Gateway.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", "POST", "OPTIONS"]'
+#/usr/local/bin/ipfs config --json Gateway.Writable true
+#/usr/local/bin/ipfs config --json Gateway.HTTPHeaders.Access-Control-Expose-Headers '["Ipfs-Hash"]'
+#/usr/local/bin/ipfs daemon & # run ipfs daemon in background
+#
+# install stack
+curl -sSL https://get.haskellstack.org/ | sh -s - -f
+#
+# install bluemix
+#( cd /tmp;wget https://clis.ng.bluemix.net/download/bluemix-cli/latest/linux64;tar zxf /tmp/linux64 )
+#( cd /tmp/Bluemix_CLI;sudo ./install_bluemix_cli )
+#
+# disable google statistic gathering
+#
+#gcloud config set disable_usage_reporting true
+#sudo chown ${ID}: /dev/fuse
+#[ ! -d /netdisk ] && sudo mkdir /netdisk
+#sudo chown ${ID}: /netdisk
+#gcsfuse $NETDISK /netdisk

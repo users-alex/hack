@@ -1,0 +1,13 @@
+#
+# Cache setup
+#
+CACHEDIR=`date +%s | sha256sum | base64 | head -c 32 ; echo`
+\rm -rf ~/.cache && \rm -rf /tmp/$CACHEDIR && mkdir -p /tmp/$CACHEDIR && ln -s /tmp/$CACHEDIR ~/.cache
+[ -d /netdisk/cache ] && ( \rm -rf ~/.cache && ln -s /netdisk/cache ~/.cache )
+mkdir -p $HOME/.cache/electron-gyp $HOME/.cache/electron \
+	$HOME/.cache/npm $HOME/.cache/node-gyp $HOME/.cache/ccache \
+	$HOME/.cache/bitmonero $HOME/.cache/gvm/archive \
+  $HOME/.cache/config $HOME/.cache/gnupg $HOME/.cache/yarn \
+  $HOME/.cache/cf $HOME/.cache/ipfs $HOME/.cache/local \
+  $HOME/.cache/pki $HOME/.cache/rpmdb $HOME/.cache/golang
+

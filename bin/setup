@@ -1,0 +1,4 @@
+~/bin/setupSpareDisk
+~/bin/setupServer
+~/bin/setupAccount
+~/bin/setupCache

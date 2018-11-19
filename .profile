@@ -41,4 +41,3 @@ fi
 
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 [[ -f "/usr/local/etc/bash_completion" ]] && source "/usr/local/etc/bash_completion"
-
