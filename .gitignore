@@ -98,7 +98,9 @@
 .usage-stats/
 .v8flags*
 .vagrant.d
-.vim*
+.vim
+.viminfo
+.vimshell
 .vscode
 .vscode*
 .wapi*
