@@ -14,7 +14,8 @@ export PATH="${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/tools:$PATH"
 export PATH="$HOME/bin:$HOME/.rvm/bin:$HOME/.gvm/bin:$JAVA_HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/local/Cellar/qt5/5.6.0/bin:$PATH" # Add RVM to PATH for scripting
 
 [ -s "$HOME/.bash_env" ] && . "$HOME/.bash_env"  # This loads various environment variables
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVS_HOME="$HOME/.nvs" && [ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
 [ -s "$HOME/.gvm/scripts/gvm" ] && . "$HOME/.gvm/scripts/gvm"
 
 ### Added by IBM Bluemix CLI

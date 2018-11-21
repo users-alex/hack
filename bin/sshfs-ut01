@@ -1,0 +1,1 @@
+sshfs alex@dev01.usertoken.com:/netdisk/work $HOME/fuse/sshfs

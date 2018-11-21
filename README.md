@@ -107,5 +107,10 @@ npm i -g yarn updtr nodemon npm brunch regenerator decaffeinate
 npm i -g imagemin
 npm i -g react-native-git-upgrade react-native-rename
 ```
+### Tools
+```
+# enable internet sharing on OSX
+bin/setupDHCP
+```
 
 V1.0.3

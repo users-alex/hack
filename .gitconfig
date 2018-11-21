@@ -1,5 +1,9 @@
-# This is Git's per-user configuration file.
 [user]
-# Please adapt and uncomment the following lines:
-	name = alex Davis
-	email = alex@alex2006hw.com
+        email = alex2006hw@gmail.com
+        name = Alex Davis
+[push]
+        default = simple
+[status]
+        submoduleSummary = true
+[diff]
+        submodule = log

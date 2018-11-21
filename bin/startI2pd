@@ -1,0 +1,5 @@
+docker run --name i2pd-anon \
+  -v `pwd`/i2pd:/var/lib/i2pd \
+  -p 7070:7070 -p 4444:4444 -p 4447:4447 -p 7656:7656 \
+  -p 2827:2827 -p 7654:7654 -p 7650:7650 \
+  -d alex2006hw/i2pd:1.0.0

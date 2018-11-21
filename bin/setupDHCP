@@ -1,0 +1,24 @@
+#
+# https://www.xarg.org/2017/07/set-up-internet-sharing-on-mac-osx-using-command-line-tools/
+# NOTE : en1 is the Wifi network with internet connection, en0 is the local network connection
+# add to /etc/pf.conf
+# internal wired (en0) as gateway for shared NAT network
+# external wireless (en1) as gateway to internet
+#
+#networksetup -setmanual "Ethernet" 10.225.1.1 255.255.255.0
+#networksetup -setmanual "AX88178" 10.225.1.1 255.255.255.0
+#
+sudo sysctl -w net.inet.ip.forwarding=1
+#
+# enable nat for en0:network to go out en1 interface
+#
+sudo cp ~/bin/pf-default.conf /etc/pf.conf
+#
+# Disable PF if it was enabled before
+#
+sudo pfctl -d
+#
+# Enable PF and load the config
+#
+sudo pfctl -e -f /etc/pf.conf
+#

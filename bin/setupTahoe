@@ -1,36 +1,24 @@
 #
 # tahoe-lafs : https://github.com/tahoe-lafs/tahoe-lafs
 #
-HOSTNAME="$(cat /etc/hostname).alex2006hw.com"
+HOSTNAME="home.alex2006hw.com"
 DATADIR="$HOME/tahoe"
-#
-# Start up introducer to get a new INVITATION
 #
 [ ! -d "$DATADIR/introducer" ] && mkdir -p "$DATADIR/introducer" && \
   tahoe create-introducer --location="tcp:$HOSTNAME:9000" --port="tcp:9000" --basedir="$DATADIR/introducer" && \
-  tahoe start "$DATADIR/introducer"
+  tahoe start "$DATADIR/introducer" 
 INTRODUCER=$(cat "$DATADIR/introducer/private/introducer.furl")
-echo "make sure to use IP address for $DATADIR/introducer/private/introducer.furl"
 echo "INVITATION : $INTRODUCER"
-#
-# start up a data node
-#
-[ -d "$DATADIR/node" ] && tahoe run "$DATADIR/node" && exit
-[ ! -d "$DATADIR/node" ] && mkdir -p "$DATADIR/node"
-#
-tahoe create-node --location="tcp:$HOSTNAME:8889" --port="tcp:8889" \
+[ ! -d "$DATADIR/node" ] && mkdir -p "$DATADIR/node" && \
+  tahoe create-node --location="tcp:$HOSTNAME:8889" --port="tcp:8889" \
     --introducer="$INTRODUCER" \
-    --basedir="$DATADIR/node" --shares-needed=3 --shares-happy=5 --shares-total=4 && \
-  sed -i "s/nickname\ =/nickname=$HOSTNAME/g" "$DATADIR/node/tahoe.cfg"  && tahoe run "$DATADIR/node" &
+    --webport=8888 --basedir="$DATADIR/node" --shares-needed=3 --shares-happy=4 --shares-total=6 && \
+  sed -i '' "s/nickname\ =/nickname=$HOSTNAME/g" "$DATADIR/node/tahoe.cfg"  && tahoe run "$DATADIR/node" &
 
-echo "update config if needed at $DATADIR/node/tahoe.cfg then restart node"
 exit
 
-#
-# start up a web client
-#
+# OSX version os sed needs ''
 [ ! -d "$DATADIR/client" ] && mkdir -p "$DATADIR/client" && \
   tahoe create-client --webport=8888 --introducer="$INTRODUCER" \
     --basedir="$DATADIR/client" --shares-needed=3 --shares-happy=10 --shares-total=7 && \
-  sed -i "s/nickname\ =/nickname=$HOSTNAME/g" "$DATADIR/client/tahoe.cfg" && tahoe run "$DATADIR/client" &
-
+  sed -i '' "s/nickname\ =/nickname=$HOSTNAME/g" "$DATADIR/client/tahoe.cfg" && tahoe run "$DATADIR/client" &

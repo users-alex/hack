@@ -90,6 +90,10 @@
 .s3cfg*
 .secrets
 .sh_history
+.pkg-cache/
+.rndebuggerrc
+.vault-token
+.zoomus/
 .sqlite_history
 .ssh
 .standard-cache/
@@ -98,9 +102,7 @@
 .usage-stats/
 .v8flags*
 .vagrant.d
-.vim
-.viminfo
-.vimshell
+.vim*
 .vscode
 .vscode*
 .wapi*
@@ -157,3 +159,12 @@ tmp
 work/
 zlaptop.vncloc
 private
+.electron
+.gsutil/
+.nvs/
+.tahoe
+.vpython-root/
+.vpython_cipd_cache/
+.wine/
+tahoe
+.passwd-s3fs
