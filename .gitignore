@@ -91,6 +91,9 @@
 .secrets
 .sh_history
 .pkg-cache/
+.vpython-root
+.wine
+.zoomus
 .rndebuggerrc
 .vault-token
 .zoomus/

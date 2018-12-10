@@ -1,7 +1,7 @@
 #
 # account setup
 #
-CACHEDIR=`date +%s | md5 | base64 | head -c 32 ; echo`
+CACHEDIR=`date +%s | sha256sum | base64 | head -c 32 ; echo`
 \rm -rf ~/.cache;\rm -rf /tmp/${CACHEDIR}/cache;mkdir -p /tmp/${CACHEDIR}/cache;ln -s /tmp/${CACHEDIR}/cache ~/.cache
 # install nvm
 \rm -rf ~/.npm;mkdir -p ~/.cache/npm;ln -s ~/.cache/npm ~/.npm

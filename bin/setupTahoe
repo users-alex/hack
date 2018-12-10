@@ -12,7 +12,7 @@ echo "INVITATION : $INTRODUCER"
 [ ! -d "$DATADIR/node" ] && mkdir -p "$DATADIR/node" && \
   tahoe create-node --location="tcp:$HOSTNAME:8889" --port="tcp:8889" \
     --introducer="$INTRODUCER" \
-    --webport=8888 --basedir="$DATADIR/node" --shares-needed=3 --shares-happy=4 --shares-total=6 && \
+    --webport=8888 --basedir="$DATADIR/node" --shares-needed=2 --shares-happy=2 --shares-total=2 && \
   sed -i '' "s/nickname\ =/nickname=$HOSTNAME/g" "$DATADIR/node/tahoe.cfg"  && tahoe run "$DATADIR/node" &
 
 exit
@@ -20,5 +20,5 @@ exit
 # OSX version os sed needs ''
 [ ! -d "$DATADIR/client" ] && mkdir -p "$DATADIR/client" && \
   tahoe create-client --webport=8888 --introducer="$INTRODUCER" \
-    --basedir="$DATADIR/client" --shares-needed=3 --shares-happy=10 --shares-total=7 && \
+    --basedir="$DATADIR/client" --shares-needed=2 --shares-happy=2 --shares-total=2 && \
   sed -i '' "s/nickname\ =/nickname=$HOSTNAME/g" "$DATADIR/client/tahoe.cfg" && tahoe run "$DATADIR/client" &
