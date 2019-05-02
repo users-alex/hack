@@ -1,1 +1,1 @@
-sshfs alex@dev01.alex2006hw.com:work $HOME/fuse/sshfs
+sshfs alex@dev01.bellbella.com:work $HOME/fuse/sshfs
