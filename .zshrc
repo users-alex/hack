@@ -118,5 +118,4 @@ if [ -f '/Volumes/Data/alex/Downloads/google-cloud-sdk/completion.zsh.inc' ]; th
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-#export NVS_HOME="$HOME/.nvs"
-#[ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
+eval "$(nodenv init -)"

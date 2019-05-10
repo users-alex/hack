@@ -9,10 +9,9 @@ default template for a OSX user's home account.  Do the following after clone
 ./bin/install-acdcli
 ```
 
-## Added utilities homebrew, nvm, rvm, pyenv, gvm, zsh
+## Added utilities homebrew, rvm, pyenv, gvm, zsh
 ```
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 curl -sSL https://get.rvm.io | bash -s stable --rails
 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
@@ -75,6 +74,10 @@ brew tap cloudfoundry/tap
 brew install cf-cli
 # redux
 brew cask install react-native-debugger
+# Node manager nodenv and default to node 10.10.0
+brew install nodenv && nodenv init && nodenv install 10.10.0 && nodenv global 10.10.0
+# Test install
+curl -fsSL https://github.com/nodenv/nodenv-installer/raw/master/bin/nodenv-doctor | bash
 ```
 brew tap discoteq/discoteq
 brew install flock
