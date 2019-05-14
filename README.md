@@ -74,10 +74,10 @@ brew tap cloudfoundry/tap
 brew install cf-cli
 # redux
 brew cask install react-native-debugger
-# Node manager nodenv and default to node 10.10.0
-brew install nodenv && nodenv init && nodenv install 10.10.0 && nodenv global 10.10.0
+# Node manager nodenv and default to node 10.10.0 (using NVM for better react-native compat)
+#brew install nodenv && nodenv init && nodenv install 10.10.0 && nodenv global 10.10.0
 # Test install
-curl -fsSL https://github.com/nodenv/nodenv-installer/raw/master/bin/nodenv-doctor | bash
+#curl -fsSL https://github.com/nodenv/nodenv-installer/raw/master/bin/nodenv-doctor | bash
 ```
 brew tap discoteq/discoteq
 brew install flock

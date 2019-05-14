@@ -4,17 +4,15 @@ echo $START
 export CLICOLOR=1
 #export LSCOLORS=ExFxCxDxBxegedabagacad
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+[[ -f "/usr/local/etc/bash_completion" ]] && source "/usr/local/etc/bash_completion"
 [[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 [[ -s "$HOME/.nvm/nvm.sh" ]] && source "$HOME/.nvm/nvm.sh"
 
-#export PATH="$HOME/bin:$HOME/.pyenv/bin:$HOME/.rvm/bin:$HOME/.gvm/bin:/usr/local/opt/sqlite/bin:$PATH" # Add RVM to PATH for scripting
-
-#eval "$(pyenv init -)"
-#eval "$(pyenv virtualenv-init -)"
-
-export PATH="$HOME/bin:$HOME/.rvm/bin:$HOME/.gvm/bin:/usr/local/opt/sqlite/bin:$PATH" # Add RVM to PATH for scripting
+export PATH="$HOME/bin:$HOME/.rvm/bin:$HOME/.gvm/bin:$JAVA_HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/local/Cellar/qt5/5.6.0/bin:$PATH"
+export PATH="${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/tools:$PATH"
+export PATH="$HOME/.nvs/default/bin:$PATH"
 
 SSH_ENV="$HOME/.ssh/environment"
 
@@ -38,6 +36,3 @@ if [ -f "${SSH_ENV}" ]; then
 else
      start_agent;
 fi
-
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-[[ -f "/usr/local/etc/bash_completion" ]] && source "/usr/local/etc/bash_completion"

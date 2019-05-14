@@ -1,0 +1,1 @@
+sshfs alex@dev01.alex2006hw.com:/home/alex $HOME/fuse/sshfs

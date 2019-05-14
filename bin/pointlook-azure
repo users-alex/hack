@@ -1,0 +1,3 @@
+#ssh -A alex@seed01.pointlook.com
+#
+ssh -A alex@pointlook.japaneast.cloudapp.azure.com
