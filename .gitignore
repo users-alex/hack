@@ -90,6 +90,9 @@
 .s3cfg*
 .secrets
 .sh_history
+.dat/
+.nexe/
+.nodenv/
 .pkg-cache/
 .vpython-root
 .wine
@@ -171,3 +174,4 @@ private
 .wine/
 tahoe
 .passwd-s3fs
+eval

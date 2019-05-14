@@ -1,0 +1,1 @@
+sshfs alex@dev.nautilustechnologies.io:work $HOME/fuse/sshfs

@@ -1,0 +1,2 @@
+ssh -L 8081:127.0.0.1:8081 -N -f -l alex dev01.bellbella.com
+ssh -L 8888:127.0.0.1:8888 -N -f -l alex dev01.bellbella.com
