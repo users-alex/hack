@@ -116,7 +116,8 @@ npm i -g react-native-git-upgrade react-native-rename
 bin/setupDHCP
 ```
 
-### .ssh
+### ssh config
+
 ```
 Host *
  SendEnv LANG LC_*
@@ -148,5 +149,6 @@ Host nautilus
 #  IdentityFile ~/.ssh/id_rsa
 #  ProxyCommand ssh -T -i ~/.ssh/id_rsa alex@dev.nautilustechnologies.io
 #Host remote-host ControlMaster auto ControlPath ~/.ssh/master-%l-%r@%h:%p ControlPersist 2h 
+
 ```
 V1.0.3
