@@ -140,11 +140,11 @@ Host nautilus
 #    RemoteForward 8081 dev.nautilustechnologies.io:8081
 
 # local ports to remote
-    LocalForward 127.0.0.1:8111 dev.nautilustechnologies.io:8111
-    LocalForward 127.0.0.1:8112 dev.nautilustechnologies.io:8112
-    LocalForward 127.0.0.1:8115 dev.nautilustechnologies.io:8115
-    LocalForward 127.0.0.1:8080 dev.nautilustechnologies.io:8080
-    LocalForward 127.0.0.1:8080 dev.nautilustechnologies.io:8081
+    LocalForward 8111 127.0.0.1:8111
+    LocalForward 8112 127.0.0.1:8112
+    LocalForward 8115 127.0.0.1:8115
+    LocalForward 8080 127.0.0.1:8080
+    LocalForward 8081 127.0.0.1:8081
 #  IdentityFile ~/.ssh/id_rsa
 #  ProxyCommand ssh -T -i ~/.ssh/id_rsa alex@dev.nautilustechnologies.io
 #Host remote-host ControlMaster auto ControlPath ~/.ssh/master-%l-%r@%h:%p ControlPersist 2h 
