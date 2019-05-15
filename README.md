@@ -133,11 +133,11 @@ Host nautilus
     ForwardAgent yes
 
 # remote ports to local
-    RemoteForward 8111 localhost:8111
-    RemoteForward 8112 localhost:8112
-    RemoteForward 8115 localhost:8115
-    RemoteForward 8080 localhost:8010
-    RemoteForward 8081 localhost:8081
+    RemoteForward 8111 dev.nautilustechnologies.io:8111
+    RemoteForward 8112 dev.nautilustechnologies.io:8112
+    RemoteForward 8115 dev.nautilustechnologies.io:8115
+    RemoteForward 8080 dev.nautilustechnologies.io:8010
+    RemoteForward 8081 dev.nautilustechnologies.io:8081
 
 # local ports to remote
 #    LocalForward 127.0.0.1:8111 127.0.0.1:8111
