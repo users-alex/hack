@@ -116,4 +116,30 @@ npm i -g react-native-git-upgrade react-native-rename
 bin/setupDHCP
 ```
 
+### .ssh
+```
+
+Host *
+ SendEnv LANG LC_*
+ ForwardAgent yes
+ AddKeysToAgent yes
+ UseKeychain yes
+ IdentityFile ~/.ssh/id_rsa
+ ControlMaster auto
+ ControlPath  ~/.ssh/sockets/%r@%h-%p
+ ControlPersist  600
+Host nautilus
+    User alex
+    HostName dev.nautilustechnologies.io
+    ForwardAgent yes
+    LocalForward 127.0.0.1:8111 127.0.0.1:8111
+    LocalForward 127.0.0.1:8112 127.0.0.1:8112
+    LocalForward 127.0.0.1:8115 127.0.0.1:8115
+    LocalForward 127.0.0.1:8080 127.0.0.1:8080
+#  IdentityFile ~/.ssh/id_rsa
+#  ProxyCommand ssh -T -i ~/.ssh/id_rsa alex@dev.nautilustechnologies.io
+#Host remote-host ControlMaster auto ControlPath ~/.ssh/master-%l-%r@%h:%p ControlPersist 2h 
+
+```
+
 V1.0.3

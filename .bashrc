@@ -10,8 +10,10 @@ export EDITOR=/usr/local/bin/vim
 export REACT_EDITOR=$EDITOR
 export PAGER=/bin/cat
 
-#[ -s "$HOME/.bash_env" ] && . "$HOME/.bash_env"  # This loads various environment variables
+[ -s "$HOME/.ssh-find-agent.sh" ] && . "$HOME/.ssh-find-agent.sh"  # This loads various environment variables
+[ -s "$HOME/.bash_env" ] && . "$HOME/.bash_env"  # This loads various environment variables
 export NVS_HOME="$HOME/.nvs" && [ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
+
 #[ -s "$HOME/.gvm/scripts/gvm" ] && . "$HOME/.gvm/scripts/gvm"
 
 ### Added by IBM Bluemix CLI

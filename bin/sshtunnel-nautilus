@@ -1,1 +1,3 @@
-ssh -L 8443:127.0.0.1:8443 -N -f -l alex dev.nautilustechnologies.io
+#ssh -A -L 8443:127.0.0.1:8443 -N -f -l alex dev.nautilustechnologies.io
+#######
+ ssh -i .ssh/id_rsa -L 8443:127.0.0.1:8443 alex@dev.nautilustechnologies.io 'docker run -d --name nautilus -p "127.0.0.1:8443:8443" -v "/netdisk/nautilus/alex:/home/coder/project" alex2006hw/vsceditor:1.0.0 --allow-http --no-auth;docker logs nautilus -f'
