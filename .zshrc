@@ -93,6 +93,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 [ -f ~/.profile ] && . ~/.profile
 [ -f ~/.bashrc ] && . ~/.bashrc
+[ -f ~/.ssh-find-agent.sh ] && . ~/.ssh-find-agent.sh
 
 [ -f ~/.zprezto/init.zsh ] && source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
