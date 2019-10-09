@@ -104,6 +104,8 @@
 .pkg-cache
 .putty
 .standard-cache
+.standard-v12-cache
+.standard-v13-cache
 .dat/
 .nexe/
 .nodenv/

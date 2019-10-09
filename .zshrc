@@ -93,7 +93,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 [ -f ~/.profile ] && . ~/.profile
 [ -f ~/.bashrc ] && . ~/.bashrc
-[ -f ~/.ssh-find-agent.sh ] && . ~/.ssh-find-agent.sh
+[ -f ~/.ssh-find-agent.sh ] && source ~/.ssh-find-agent.sh
 
 [ -f ~/.zprezto/init.zsh ] && source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
@@ -118,3 +118,5 @@ ssh-reagent () {
 #if [ -f '/Volumes/Data/alex/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Volumes/Data/alex/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+export NVS_HOME="$HOME/.nvs"
+[ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
