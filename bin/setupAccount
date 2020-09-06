@@ -1,6 +1,8 @@
 #
 # account setup
 #
+NODE_VERSION=14.9
+GO_VERSION=1.14.8
 CACHEDIR=`date +%s | sha256sum | base64 | head -c 32 ; echo`
 \rm -rf ~/.cache;\rm -rf /tmp/${CACHEDIR}/cache;mkdir -p /tmp/${CACHEDIR}/cache;ln -s /tmp/${CACHEDIR}/cache ~/.cache
 # install nvm
@@ -8,6 +10,7 @@ CACHEDIR=`date +%s | sha256sum | base64 | head -c 32 ; echo`
 \rm -rf ~/.node-gyp;mkdir -p ~/.cache/node-gyp;ln -s ~/.cache/node-gyp ~/.node-gyp
 \rm -rf ~/.ccache;mkdir -p ~/.cache/ccache;ln -s ~/.cache/ccache ~/.ccache
 \rm -rf ~/.bitmonero;mkdir -p ~/.cache/bitmonero;ln -s ~/.cache/bitmonero ~/.bitmonero
+rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && source ~/.nvm/nvm.sh && nvm install $NODE_VERSION
 # install gvm nvs
 #\rm -rf ~/.nvm;curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash &
 # install nvs
@@ -18,7 +21,7 @@ git clone https://github.com/jasongin/nvs "$NVS_HOME"
 # install gvm
 \rm -rf ~/.gvm;bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 \rm -rf ~/.gvm/archive;mkdir -p ~/.cache/gvm/archive;ln -s ~/.cache/gvm/archive ~/.gvm/archive
-(. "${HOME}/.gvm/scripts/gvm" && gvm install go1.11.1 -B && gvm alias delete latest;gvm alias create latest go1.11.1)
+(. "${HOME}/.gvm/scripts/gvm" && gvm install go${GO_VERSION} -B && gvm alias delete latest;gvm alias create latest go${GO_VERSION})
 # install xgo
 export GOROOT=~/go
 [ ! -d ${GOROOT} ] && mkdir -p ${GOROOT}
