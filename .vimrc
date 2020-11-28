@@ -407,7 +407,8 @@ autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bu
 " Nerdtree config
 map <C-n> :NERDTreeToggle<CR>
 
-let g:NERDTreeIndicatorMapCustom = {
+" let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
