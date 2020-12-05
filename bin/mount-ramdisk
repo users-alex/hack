@@ -1,0 +1,1 @@
+sshfs dev@genesis.nautilusly.com:/ramdisk/home/work $HOME/fuse/ramdisk

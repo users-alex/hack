@@ -1,0 +1,1 @@
+sshfs dev@genesis.nautilusly.com:/netdisk/home/dev/work $HOME/fuse/genesis

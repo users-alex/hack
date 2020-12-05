@@ -1,0 +1,1 @@
+sshfs dev@10.0.0.60:/nautilus/home/dev/work $HOME/fuse/60
