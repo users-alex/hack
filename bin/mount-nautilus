@@ -1,0 +1,12 @@
+#!/bin/bash
+####
+DEV01=dev01.aws.nautilusly.com
+CHIEF=chief.aws.nautilusly.com
+GENESIS=genesis.aws.nautilusly.com
+NAUTILUS=nautilus.nautilusly.com
+PI60=10.0.0.60
+SOURCE=work
+USER=dev
+SERVER=${NAUTILUS}
+####
+sshfs ${USER}@${SERVER}:${SOURCE} $HOME/fuse/nautilus

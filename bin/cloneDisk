@@ -1,0 +1,5 @@
+SOURCE='/'
+DESTINATION=''/Volumes/alex-laptop'
+
+sudo /usr/local/bin/rsync -xrlptgoXvHS --progress --delete --fileflags \
+  ${SOURCE} ${DESTINATION}

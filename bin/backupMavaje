@@ -1,0 +1,2 @@
+sudo vsdbutil -a /Volumes/BackupClone
+sudo rsync -xrlptgoXvHS --progress --delete --fileflags / /Volumes/BackupClone

@@ -1,0 +1,1 @@
+diskutil unmount force /Users/alex/ec2disk

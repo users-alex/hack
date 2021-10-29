@@ -1,1 +1,6 @@
-system_profiler SPHardwareDataType | awk '/Serial/ {print $4}'
+#### method 1 #######
+sudo dmidecode -t system
+#### method 2 ######
+sudo inxi -M
+#### method 3 ######
+sudo lshw -C system
