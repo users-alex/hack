@@ -1,0 +1,27 @@
+#
+createIntroducer() {
+  [ ! -d "$HOME/tahoe/introducer" ] && mkdir -p "$HOME/tahoe/introducer"
+  tahoe create-introducer \
+    --tor-control-port=unix:/var/run/tor/control --listen=tor \
+    --nickname="23d82a53da3c4750a3e1039f0ba4c896" \
+    --hide-ip --basedir="$HOME/tahoe/introducer"
+  tahoe start "$HOME/tahoe/introducer"
+#
+  INTRODUCER=$(cat "$HOME/tahoe/introducer/private/introducer.furl")
+}
+#
+createNode() {
+  [ ! -d "$HOME/tahoe/node" ] && mkdir -p "$HOME/tahoe/node"
+  tahoe create-node \
+    --listen=tor --tor-control-port=unix:/var/run/tor/control \
+    --introducer="$INTRODUCER" \
+    --shares-needed=3 --shares-happy=3 --shares-total=10 \
+    --hide-ip --helper --nickname="23d82a53da3c4750a3e1039f0ba4c896" \
+    --basedir="$HOME/tahoe/node"
+#
+  tahoe start "$HOME/tahoe/node"
+#
+}
+#
+createIntroducer
+createNode

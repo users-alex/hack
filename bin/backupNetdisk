@@ -1,0 +1,14 @@
+if grep -qs '/backup/home ' /proc/mounts; then
+    LOCK=/tmp/backuphome.LCK
+    backup() {
+	/usr/bin/touch ${LOCK}
+	/usr/bin/rsync -avz --delete --exclude 'swapfile' 10.138.15.197:/netdisk/joshua /backup/
+	/usr/bin/rsync -avz --delete --exclude 'swapfile' 10.138.15.197:/netdisk/project/joshua /backup/project/
+	/usr/bin/rsync -avz --delete --exclude 'swapfile' 10.138.15.197:/netdisk/joshua /netdisk/home/
+	/usr/bin/rsync -avz --delete --exclude 'swapfile' 10.138.15.197:/netdisk/project/joshua /netdisk/home/project/
+	/bin/rm ${LOCK}
+    }
+    echo "------------:" $(date) ":------------"
+    echo '############# backup dev01 project ################'
+    [ ! -f ${LOCK} ] && backup
+fi

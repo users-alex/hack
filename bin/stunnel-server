@@ -1,0 +1,11 @@
+
+nerod_server]
+accept = 30000
+connect = < monerod-local-ip >:18081
+sslVersion = TLSv1.2
+verify = 2
+cert = /path/to/certs/green-chain.pem
+key = /path/to/certs/green.no.key
+CAfile = /path/to/ca/tls-ca-chain.pem
+CRLfile = /path/to/crl/tls-ca-chain.crl
+

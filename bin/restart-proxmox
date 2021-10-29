@@ -1,0 +1,1 @@
+service pve-cluster restart && service pvedaemon restart && service pvestatd restart && service pveproxy restart

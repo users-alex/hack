@@ -1,0 +1,10 @@
+sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart \
+-activate -configure -access -on \
+-configure -allowAccessFor -specifiedUsers \
+-configure -users ec2-user \
+-configure -restart -agent -privs -all
+
+sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart \
+ -configure -access -on -privs -all -users ec2-user
+
+exit

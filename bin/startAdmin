@@ -1,0 +1,4 @@
+[ -f ~/.secrets ] && source ~/.secrets
+PORT=8082
+[ ! -z $KEYDBDIR ] && mkdir -p `pwd`/keydb && export KEYDBDIR=`pwd`/keydb
+docker run -d -v $KEYDBDIR:/a/keydb -p $PORT:8443 -e oneTimePassword=disabled -e sshKeyLength=4096 adito/keybox

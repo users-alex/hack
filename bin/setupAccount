@@ -1,31 +1,38 @@
 #
 # account setup
 #
-NODE_VERSION=14.9
-GO_VERSION=1.14.8
-CACHEDIR=`date +%s | sha256sum | base64 | head -c 32 ; echo`
-\rm -rf ~/.cache;\rm -rf /tmp/${CACHEDIR}/cache;mkdir -p /tmp/${CACHEDIR}/cache;ln -s /tmp/${CACHEDIR}/cache ~/.cache
-# install nvm
-\rm -rf ~/.npm;mkdir -p ~/.cache/npm;ln -s ~/.cache/npm ~/.npm
-\rm -rf ~/.node-gyp;mkdir -p ~/.cache/node-gyp;ln -s ~/.cache/node-gyp ~/.node-gyp
-\rm -rf ~/.ccache;mkdir -p ~/.cache/ccache;ln -s ~/.cache/ccache ~/.ccache
-\rm -rf ~/.bitmonero;mkdir -p ~/.cache/bitmonero;ln -s ~/.cache/bitmonero ~/.bitmonero
-rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && source ~/.nvm/nvm.sh && nvm install $NODE_VERSION
+NODE_VERSION=12.19
+GO_VERSION=1.17.2
+#CACHEDIR=`date +%s | sha256sum | base64 | head -c 32 ; echo`
+#\rm -rf ~/.cache;\rm -rf /tmp/${CACHEDIR}/cache;mkdir -p /tmp/${CACHEDIR}/cache;ln -s /tmp/${CACHEDIR}/cache ~/.cache
+## install nvm
+unset NVM_DIR
+\rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && source ~/.nvm/nvm.sh && nvm install ${NODE_VERSION}
+# install pyenv
+unset PYENV_ROOT
+\rm -rf ~/.pyenv
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
 # install gvm nvs
-#\rm -rf ~/.nvm;curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash &
 # install nvs
-export NVS_HOME="$HOME/.nvs"
-git clone https://github.com/jasongin/nvs "$NVS_HOME"
-. "$NVS_HOME/nvs.sh" install
-(. "$NVS_HOME/nvs.sh" && nvs add 8.11.4;nvs link 8.11.4;nvs use 8.11.4) &
+#export NVS_HOME="$HOME/.nvs"
+#git clone https://github.com/jasongin/nvs "$NVS_HOME"
+#. "$NVS_HOME/nvs.sh" install
+#(. "$NVS_HOME/nvs.sh" && nvs add 8.11.4;nvs link 8.11.4;nvs use 8.11.4) &
 # install gvm
 \rm -rf ~/.gvm;bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 \rm -rf ~/.gvm/archive;mkdir -p ~/.cache/gvm/archive;ln -s ~/.cache/gvm/archive ~/.gvm/archive
-(. "${HOME}/.gvm/scripts/gvm" && gvm install go${GO_VERSION} -B && gvm alias delete latest;gvm alias create latest go${GO_VERSION})
+(. "${HOME}/.gvm/scripts/gvm" && gvm install go${GO_VERSION} -B && gvm alias delete latest;gvm alias create latest go${GO_VERSION} )
 # install xgo
 export GOROOT=~/go
 [ ! -d ${GOROOT} ] && mkdir -p ${GOROOT}
 go get github.com/karalabe/xgo  # go cross compiler
+curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $GOPATH/bin latest
+# install goxc
+go get github.com/laher/goxc
+goxc -bc "linux darwin" -arch "amd64" -t
 #wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz
 #tar zxf go1.9.2.linux-amd64.tar.gz;\rm -rf go1.9.2.linux-amd64.tar.gz
 #
@@ -34,10 +41,28 @@ go get github.com/karalabe/xgo  # go cross compiler
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim &
 curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh &
 #
+# install tmux-plug-ins
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+#
+echo "unbind C-b" > ~/.tmux.conf
+echo "set-option -g prefix C-a" >> ~/.tmux.conf
+echo "bind-key C-a send-prefix" >> ~/.tmux.conf
+echo "bind -n C-x setw synchronize-panes" >> ~/.tmux.conf
+# List of plugins
+echo "set -g @plugin 'tmux-plugins/tpm'" >> ~/.tmux.conf
+echo "set -g @plugin 'tmux-plugins/tmux-sensible'" >> ~/.tmux.conf
+echo "set -g @plugin 'tmux-plugins/tmux-resurrect'" >> ~/.tmux.conf
+echo "set -g @plugin 'tmux-plugins/tmux-continuum'" >> ~/.tmux.conf
+echo "run '~/.tmux/plugins/tpm/tpm'" >> ~/.tmux.conf
+####
 # install doom-emacs in vim mode. maybe edit init.el
 # ( git clone https://github.com/hlissner/doom-emacs ~/.emacs.d && cd ~/.emacs.d && cp init.example.el init.el && make install)
 # install shell plug-ins
 curl https://raw.githubusercontent.com/rupa/z/master/z.sh > ~/.z.sh
+#
+# enable private github repo access for go get ...
+#
+git config --global url.git@github.com:.insteadOf https://github.com/
 #
 # install Applications
 #
@@ -47,3 +72,7 @@ curl https://raw.githubusercontent.com/rupa/z/master/z.sh > ~/.z.sh
 # curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github" | tar -zx
 #  install network emulator tool
 # (cd /tmp;git clone https://github.com/mininet/mininet.git;./mininet/util/install.sh -s ~/mininet -a ) &
+# tune for max RAM performance
+echo "2000" > sudo tee -a /proc/sys/vm/vfs_cache_pressure
+echo "100" > sudo tee -a /proc/sys/vm/dirty_ratio
+

@@ -1,0 +1,10 @@
+
+nerod_client]
+client = yes
+accept = 18081
+connect = < external.ip.of.node >:30000
+sslVersion = TLSv1.2
+verify = 3
+cert = /path/to/certs/barney.crt
+key = /path/to/certs/barney.key
+CAfile = /path/to/ca/green-chain.pem

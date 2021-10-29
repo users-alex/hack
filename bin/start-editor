@@ -1,0 +1,10 @@
+# http://wiki.ros.org/docker/Tutorials/GUI
+# mount /etc/group and /etc/passwd read only
+# set user from $USER
+  #-v /netdisk/work:/tmp/hx -w /tmp/hx -v /etc/group:/etc/group:ro -v /etc/passwd:/etc/passwd:ro —user=alex \
+docker run -d --name orion-editor \
+  -v ~/work:/opt/orion.client/modules/orionode/.workspace \
+  -p 8081:8081 \
+  usrcoin/orioneditor:1.0.0
+
+#ngrok http 8081

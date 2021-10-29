@@ -1,0 +1,2 @@
+cd ~/remote/hyperssh
+node server.js

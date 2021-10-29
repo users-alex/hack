@@ -1,0 +1,2 @@
+aws configure set default.s3.max_concurrent_requests 50
+aws s3 sync //nautilus/firmwares/ s3://nautilus-sources/firmwares/ --exclude "lost+found"

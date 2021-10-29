@@ -1,0 +1,59 @@
+## spare disk setup
+#  add this to crontab -e to run at boot
+#  --------------------------------------
+#  @reboot /usr/local/sbin/setupSpareDisk > /var/log/reboot.log 2>&1 &
+#  --------------------------------------
+DATE=$(/bin/date +%Y%m.%d.%s)
+SPAREDISK=$(/sbin/fdisk -l |grep '/dev/xvdf1')
+FSTAB=$(/bin/grep xvdb /etc/fstab)
+echo "$DATE: spare disk"
+checkDisk() {
+  #[[ ! -z $FSTAB ]] && exit 0
+  # check if sdc is available
+  [[ -z $SPAREDISK ]] && exit 0
+  echo "$DATE: spare disk dectected"
+}
+partdisk(){
+/sbin/sfdisk /dev/xvdb <<PART_TABLE
+
+label: dos
+label-id: 0x044402dc
+device: /dev/xvdb
+unit: sectors
+
+/dev/xvdb1 : start=        2048, size=   136314880, type=83
+/dev/xvdb2 : start=   136316928, size=    20967424, type=82
+
+PART_TABLE
+}
+formatDisks() {
+  (/sbin/mkswap /dev/xvdb2) && \
+  (mkfs.xfs -f -L NETDISK -b size=4096 /dev/xvdb1) 2>&1 > /dev/null
+  echo "$DATE: adding spare disk to /etc/fstab"
+  [[ -z $FSTAB ]] && \
+  cp /etc/fstab /etc/fstab-backup
+  echo "/dev/xvdb2       swap		swap	defaults,pri=200        0 0" | tee -a /etc/fstab
+  echo "/dev/xvdb1       /netdisk	auto	defaults,nofail   0 0" | tee -a /etc/fstab
+  echo "/dev/xvdf1       /data		auto	defaults,nofail   0 0" | tee -a /etc/fstab
+}
+mountAll() {
+ swapon -a
+ mount -a
+ #(/bin/mkdir -p /cache/docker && /bin/rm -rf /var/lib/docker && /bin/ln -s /cache/docker /var/lib/docker)
+ #( cd /etc;tar jxf /usr/local/etc/ssh.tbz )
+}
+copyHome(){
+ mkdir -p /netdisk/home
+ ( cd /data;tar cf - * ) | ( cd /netdisk;tar xpf - ) &
+}
+###################
+echo "$DATE: building spare disk on /dev/xvdb"
+checkDisk
+partdisk
+formatDisks
+mountAll
+service docker restart
+service ssh restart
+copyHome &
+#
+exit 0

@@ -1,0 +1,4 @@
+mkdir -p /tmp/nada
+cd /tmp/nada;wget https://raw.githubusercontent.com/rndme/nadafile/master/new_nadafile.html;mv new_nadafile.html index.html
+cd /tmp/nada;python -m SimpleHTTPServer 8080
+

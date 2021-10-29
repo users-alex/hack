@@ -2,12 +2,18 @@
 # Cache setup
 #
 CACHEDIR=`date +%s | sha256sum | base64 | head -c 32 ; echo`
-\rm -rf ~/.cache && \rm -rf /tmp/$CACHEDIR && mkdir -p /tmp/$CACHEDIR && ln -s /tmp/$CACHEDIR ~/.cache
-[ -d /netdisk/cache ] && ( \rm -rf ~/.cache && ln -s /netdisk/cache ~/.cache )
+# \rm -rf ~/.cache && \rm -rf /tmp/$CACHEDIR && mkdir -p /tmp/$CACHEDIR && ln -s /tmp/$CACHEDIR ~/.cache
+# [ -d /netdisk/cache ] && ( \rm -rf ~/.cache && ln -s /netdisk/cache ~/.cache )
+# mkdir -p /localdisk/dev/cache
+mkdir -p /ramdisk/cache /ramdisk/dev
 mkdir -p $HOME/.cache/electron-gyp $HOME/.cache/electron \
 	$HOME/.cache/npm $HOME/.cache/node-gyp $HOME/.cache/ccache \
 	$HOME/.cache/bitmonero $HOME/.cache/gvm/archive \
   $HOME/.cache/config $HOME/.cache/gnupg $HOME/.cache/yarn \
   $HOME/.cache/cf $HOME/.cache/ipfs $HOME/.cache/local \
-  $HOME/.cache/pki $HOME/.cache/rpmdb $HOME/.cache/golang
-
+  $HOME/.cache/pki $HOME/.cache/rpmdb $HOME/.cache/golang \
+  $HOME/.cache/packer.d $HOME/.cache/terraform.d $HOME/.cache/kube \
+  $HOME/.cache/ansible $HOME/.cache/acme.sh \
+  $HOME/.cache/helm $HOME/.cache/m2 $HOME/.cache/neosnippet \
+  $HOME/.cache/ansible_galaxy $HOME/.cache/package_cache \
+  $HOME/.cache/cpan $HOME/.cache/my.cnf $HOME/.cache/docker

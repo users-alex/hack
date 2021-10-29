@@ -1,0 +1,9 @@
+ID=`/usr/bin/whoami`
+
+docker run -d \
+  -p 127.0.0.1:8443:8443 \
+  -v /netdisk/nautilus/${ID}:/home/coder/project \
+  alex2006hw/vsceditor:1.0.0 --allow-http --no-auth
+
+echo 'usage: ssh -L 8443:127.0.0.1:8443 -N -f -l ${ID} dev.nautilustechnologies.io'
+echo ' browse to -> http://localhost:8443'

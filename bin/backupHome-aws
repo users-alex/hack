@@ -1,0 +1,12 @@
+    LOCKx=/tmp/backuphome.LCK
+    backuphome() {
+	/usr/bin/touch ${LOCKx}
+	/usr/bin/rsync -avxzHAWXS --numeric-ids --delete --exclude 'swapfile' --exclude 'lost+found'  /netdisk/ /backup/
+	/bin/rm ${LOCKx}
+    }
+ 
+if grep -qs '/backup ' /proc/mounts; then
+    echo '############# backup alex home ################'
+    [ ! -f ${LOCKx} ] && backuphome
+fi   
+echo "------------:" $(date) ":------------"

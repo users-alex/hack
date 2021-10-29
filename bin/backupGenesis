@@ -1,0 +1,17 @@
+#
+DATE=$(date -u +"%Y%m%d-%H%M%S")
+LOCKx=/tmp/backupGenesis.LCK
+    backupGenesis() {
+        /usr/bin/touch ${LOCKx}
+        /usr/bin/rsync -avzxHAWXS --numeric-ids --delete \
+		/localdisk/home/ genesis:/netdisk/home/
+#		--exclude 'swapfile' --exclude 'lost+found' \
+#                --exclude 'docker' --exclude 'containerd' --exclude 'squid' --exclude 'dev' --exclude 'tmp' \
+        /bin/rm ${LOCKx}
+    }
+
+if grep -qs '/localdisk' /proc/mounts; then
+    echo "############# backup Genesis start $DATE ################"
+     [ ! -f ${LOCKx} ] && backupGenesis
+fi
+echo "------------:" backup Genesis finish $(date) ":------------"

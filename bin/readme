@@ -1,0 +1,16 @@
+#
+#
+#\rm -rf ~/Applications;git clone https://github.com/users-alex/applications-linux.git /tmp/$CACHEDIR/Applications;ln -s /tmp/$CACHEDIR/Applications ~/Applications &
+#
+#( cat; echo ---; cat <&3 ) <<EOF 3<<EOF2
+########################
+###  CUSTOMIZE TOOLS ###
+########################
+# install nodejs
+#(for fff in 6.11.2 7.10 8 9;do nvm install $fff;done);nvm alias default 7.10 &
+#EOF
+# install gvm
+#(gvm use system;gvm install go1.9.2;gvm alias create latest go1.9.2) &
+########################
+#EOF2
+cat ~/bin/setupAccount

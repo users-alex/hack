@@ -1,0 +1,4 @@
+docker run -d --name proxy\
+  -v ~/.cache/squid:/config \
+  -p 9999:8080 \
+  -t alex2006hw/proxy:1.0.0

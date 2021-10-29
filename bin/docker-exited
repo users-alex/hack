@@ -1,1 +1,10 @@
-docker ps -a |grep Exited | awk '{ print $1 }' | xargs docker rm 
+#!/bin/bash
+
+sleep 2s
+IMAGES=`docker ps -a | grep Exited | awk '{ print $1 }'`
+for image in $IMAGES; do
+  echo "stopping and deleting container $image"
+  ( docker rm $image ) &
+done
+
+echo "remove exited completed."

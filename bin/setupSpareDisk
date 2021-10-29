@@ -4,42 +4,61 @@
 #  @reboot /usr/local/sbin/setupSpareDisk > /var/log/reboot.log 2>&1 &
 #  --------------------------------------
 DATE=$(/bin/date +%Y%m.%d.%s)
-SPAREDISK=$(/sbin/fdisk -l |grep '/dev/sdb')
-FSTAB=$(/bin/grep sdb /etc/fstab)
+SPAREDISK=$(/sbin/fdisk -l |grep '/dev/sdc')
+FSTAB=$(/bin/grep sdc /etc/fstab)
 echo "$DATE: spare disk"
-# check fstab for sdb
-[[ ! -z $FSTAB ]] && exit 0
-# check if sdb is available
-[[ -z $SPAREDISK ]] && exit 0
-#
-echo "$DATE: detecting spare disk"
-
+checkDisk() {
+  #[[ ! -z $FSTAB ]] && exit 0
+  # check if sdc is available
+  [[ -z $SPAREDISK ]] && exit 0
+  echo "$DATE: spare disk dectected"
+}
 partdisk(){
-/sbin/sfdisk /dev/sdb <<PART_TABLE
+/sbin/sfdisk /dev/sdc <<PART_TABLE
 
 label: dos
-label-id: 0xd5f7e487
-device: /dev/sdb
+label-id: 0x77d109bf
+device: /dev/sdc
 unit: sectors
 
-/dev/sdb1 : start=         256, size=     5242880, type=82
-/dev/sdb2 : start=     5243136, size=    93060864, type=83
+/dev/sdc1 : start=         256, size=     8388608, type=83
+/dev/sdc2 : start=     8388864, size=    44957568, type=83
+/dev/sdc3 : start=    53346560, size=    44957440, type=83
 
 PART_TABLE
 }
-echo "$DATE: building spare disk on /dev/sdb"
+formatDisks() {
+  (/sbin/mkswap /dev/sdc1) && \
+  (mkfs.xfs -f -L NETDISK -b size=4096 /dev/sdc2;mkfs.xfs -f -L CACHE -b size=4096 /dev/sdc3) 2>&1 > /dev/null
+  echo "$DATE: adding spare disk to /etc/fstab"
+  [[ -z $FSTAB ]] && \
+  cp /etc/fstab /etc/fstab-backup
+  echo "/dev/sdc1       swap		swap	defaults,pri=200        0 0" | tee -a /etc/fstab
+  echo "/dev/sdc2       /netdisk	auto	defaults,nofail   0 0" | tee -a /etc/fstab
+  echo "/dev/sdc3       /cache		auto	defaults,nofail   0 0" | tee -a /etc/fstab
+  echo "/dev/sdb1       /data		auto	defaults,nofail   0 0" | tee -a /etc/fstab
+}
+mountAll() {
+ swapon -a
+ mount -a
+ (/bin/mkdir -p /cache/docker && /bin/rm -rf /var/lib/docker && /bin/ln -s /cache/docker /var/lib/docker)
+ ( cd /etc;tar jxf /usr/local/etc/ssh.tbz )
+}
+copyHome(){
+ mkdir -p /netdisk/home
+ #( cd /home;tar cf - * ) | ( cd /netdisk/home;tar xpf - )
+ ( cd /data;tar cf - [aA]* ) | ( cd /netdisk/home;tar xpf - ) &
+ ( cd /data;tar cf - [b-zB-Z]* ) | ( cd /netdisk/home;tar xpf - ) &
+ ( cp /usr/local/etc/passwd /etc/passwd;pwconv )
+}
+###################
+echo "$DATE: building spare disk on /dev/sdc"
+checkDisk
 partdisk
-(/sbin/mkswap /dev/sdb1 && /sbin/mkfs.ext4 -j /dev/sdb2)
-# create /netdisk
-echo "$DATE: adding spare disk to /etc/fstab"
-[[ ! -d /netdisk ]] && mkdir -p /netdisk
-[[ -z $FSTAB ]] && \
-echo "/dev/sdb1       swap    swap    defaults,pri=200        0 0" | tee -a /etc/fstab && \
-echo "/dev/sdb2       /netdisk        auto  defaults,nofail   0 0" | tee -a /etc/fstab
-#
-(/sbin/swapon -a && /bin/mount -a)
-(/bin/mkdir -p /netdisk/tmp /netdisk/docker /netdisk/cache /netdisk/work /netdisk/tahoe && \
-   /bin/chown -hR 1001 /netdisk/cache /netdisk/work /netdisk/tahoe)
-[[ ! -L /var/lib/docker ]] && ( /bin/ln -s /netdisk/docker /var/lib/docker )
+formatDisks
+mountAll
+service docker restart
+service ssh restart
+copyHome &
 #
 exit 0

@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+  PWD=$(pwd)
+#
+startServer() {
+  localDIR=${PWD%/}
+  local SERVER_IP=`cat /etc/nautilus/public_ip`
+  local SERVER_PORT=28888
+#
+  # Run at server side:
+  sudo /usr/local/sbin/speederv2 -s -l0.0.0.0:4096 -r 192.168.0.9:22 -f20:10 -k "passwd"
+
+  # Run at client side
+  # /usr/local/sbin/speederv2 -c -l0.0.0.0:3333  -r44.55.66.77:4096 -f20:10 -k "passwd"
+  #/usr/local/sbin/tinyvpn -s -l0.0.0.0:${SERVER_PORT} -f20:10 -k "passwd" --sub-net 192.168.0.0/16
+  #sudo ~/bin/tinyvpn -c -r ${SERVER_IP}:${SERVER_PORT} --sub-net 192.168.0.0/16 
+  # --report 60 --log-level 4 --log-position
+}
+####
+startServer

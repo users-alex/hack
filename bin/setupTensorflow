@@ -1,0 +1,7 @@
+sudo apt-get install -yq libhdf5-serial-dev hdf5-tools python3-pip zlib1g-dev \
+	zip libjpeg8-dev libhdf5-dev 
+pip3 install -U numpy grpcio absl-py py-cpuinfo psutil portpicker grpcio \
+	six mock requests gast h5py astor termcolor
+#after the above complete then install tensorflow...
+#pip3 install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v42 tensorflow-gpu
+

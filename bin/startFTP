@@ -1,0 +1,7 @@
+[ -f ~/.secrets ] && source ~/.secrets
+export PORT=8082
+#
+docker run -d --name crushftp -p $PORT:8080 adito/crushftp
+[ -z $FTPPASSWORD ]  && docker exec crushftp java -jar CrushFTP.jar -a $FTPADMIN $FTPPASSWORD
+[ ! -z $FTPPASSWORD ]  && docker exec crushftp java -jar CrushFTP.jar -a "ftpadmin" "Pa22-W0r4"
+

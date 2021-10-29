@@ -1,0 +1,2 @@
+#utahfs-client -cfg ~/fuse/utahfs-client.yaml -mount ~/fuse/utahfs > /dev/null 2>&1 &
+utahfs-client -cfg ~/fuse/utahfs-server.yaml -mount ~/fuse/utahfs > /dev/null 2>&1 &

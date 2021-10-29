@@ -1,0 +1,14 @@
+#
+DATE=`date -u +"%Y%m%d-%H%M%S"`
+LOCKx=/tmp/backupRamdisk.LCK
+    backupRamdisk() {
+        /usr/bin/touch ${LOCKx}
+        /usr/bin/rsync -avxHAWXS --numeric-ids --delete --exclude 'swapfile' --exclude 'lost+found'  /ramdisk/home/ /netdisk/ramdisk/
+        /bin/rm ${LOCKx}
+    }
+
+if grep -qs '/ramdisk ' /proc/mounts; then
+    echo '############# backup Ramdisk start $DATE ################'
+    [ ! -f ${LOCKx} ] && backupRamdisk
+fi
+echo "------------:" backup Ramdisk finish $(date) ":------------"

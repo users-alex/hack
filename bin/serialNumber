@@ -1,0 +1,6 @@
+#### method 1 #######
+sudo dmidecode -t system
+#### method 2 ######
+sudo inxi -M
+#### method 3 ######
+sudo lshw -C system

@@ -1,0 +1,6 @@
+# cryptdisk
+# /usr/sbin/cryptsetup luksFormat --type=luks2 --sector-size=4096 -c xchacha12,aes-adiantum-plain64 -s 256 -h sha512 --use-urandom /dev/sdc --label XMEDIA
+# cryptsetup benchmark
+# cryptsetup benchmark -c xchacha12,aes-adiantum
+#
+/usr/sbin/cryptsetup luksOpen /dev/sdc xmedia

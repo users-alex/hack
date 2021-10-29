@@ -1,0 +1,16 @@
+#
+#
+[ ! -d /var/log/nginx ] && mkdir -p /var/log/nginx
+[ ! -d /var/log/squid ] && mkdir -p /var/log/squid
+#
+# ADD to /etc/fstab to reduce io dependencies
+#
+#tmpfs   /ramdisk        tmpfs   defaults,size=100G      0 1
+#tmpfs   /squid          tmpfs   defaults,size=100G      0 1
+#tmpfs   /tmp            tmpfs   defaults,size=100G      0 1
+#tmpfs   /var/tmp        tmpfs   defaults,size=100G      0 1
+#tmpfs   /var/log        tmpfs   defaults,size=100G      0 1
+#tmpfs   /nautilus       tmpfs   defaults,size=100G      0 1
+#tmpfs   /docker         tmpfs   defaults,size=100G      0 1
+#tmpfs   /containerd     tmpfs   defaults,size=100G      0 1
+#

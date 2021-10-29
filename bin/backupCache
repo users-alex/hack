@@ -1,0 +1,11 @@
+if grep -qs '/backup/cache ' /proc/mounts; then
+    LOCKc=/tmp/backupcache.LCK
+    backupcache() {
+        /usr/bin/touch ${LOCKc}
+	/usr/bin/rsync -avxzHAWXS --numeric-ids --delete --exclude 'swapfile' /cache/ /backup/cache/
+	/bin/rm -f ${LOCKc}
+    }
+    echo "------------:" $(date) ":------------"
+    echo '############# backup cache ################'
+    [ ! -f ${LOCKc} ] && backupcache
+fi

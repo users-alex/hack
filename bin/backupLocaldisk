@@ -1,0 +1,16 @@
+#
+DATE=`date -u +"%Y%m%d-%H%M%S"`
+LOCKx=/tmp/backupLocaldisk.LCK
+    backupLocaldisk() {
+        /usr/bin/touch ${LOCKx}
+        /usr/bin/rsync -avxHAWXS --numeric-ids --delete --exclude 'swapfile' --exclude 'lost+found' \
+		--exclude 'docker' --exclude 'containerd' --exclude 'squid' --exclude 'dev' --exclude 'tmp' \
+		/localdisk/ /backup/
+        /bin/rm ${LOCKx}
+    }
+
+if grep -qs '/backup ' /proc/mounts; then
+    echo "############# backup Localdisk start $DATE ################"
+    [ ! -f ${LOCKx} ] && backupLocaldisk
+fi
+echo "------------:" backup Localdisk finish $(date) ":------------"

@@ -1,0 +1,4 @@
+sudo mkdir -p /ramdisk
+sudo mount -t tmpfs -o size=20048M tmpfs /ramdisk
+# add to fstab
+# tmpfs   /ramdisk        tmpfs   rw,size=20048M  0 0

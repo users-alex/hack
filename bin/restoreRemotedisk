@@ -1,0 +1,12 @@
+#
+DATE=`date -u +"%Y%m%d-%H%M%S"`
+LOCKx=/tmp/restoreRemotedisk.LCK
+    restoreRemotedisk() {
+        /usr/bin/touch ${LOCKx}
+        /usr/bin/rsync -avxHAWXS --numeric-ids --delete --exclude 'swapfile' --exclude 'lost+found' chief:/localdisk/ /localdisk/
+        /bin/rm ${LOCKx}
+    }
+
+echo '############# backup Localdisk start $DATE ################'
+    [ ! -f ${LOCKx} ] && restoreRemotedisk
+echo "------------:" backup Localdisk finish $(date) ":------------"

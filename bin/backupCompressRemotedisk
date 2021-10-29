@@ -1,0 +1,22 @@
+#~/bin/bash
+##
+LOCKx=/tmp/backupRemotedisk.LCK
+    backupRemotedisk() {
+	/usr/bin/touch ${LOCKx}
+        ( [[ ! -f ${LOCKx}-dev01 ]] &&  /usr/bin/touch ${LOCKx}-dev01 ; /usr/bin/rsync -avxzHAWXS --numeric-ids --delete --exclude 'swapfile' --exclude 'docker' --exclude 'lost+found'  /localdisk/ dev01:/localdisk/ ; /bin/rm -rf ${LOCKx}-dev01 ) &
+#
+        ( [[ ! -f ${LOCKx}-dev02 ]] &&  /usr/bin/touch ${LOCKx}-dev02 ; /usr/bin/rsync -avxzHAWXS --numeric-ids --delete --exclude 'swapfile' --exclude 'docker' --exclude 'lost+found'  /localdisk/ dev02:/localdisk/ ; /bin/rm -rf ${LOCKx}-dev02 ) &
+#
+        ( [[ ! -f ${LOCKx}-genesis ]] &&  /usr/bin/touch ${LOCKx}-genesis ; /usr/bin/rsync -avxzHAWXS --numeric-ids --delete --exclude 'swapfile' --exclude 'docker' --exclude 'lost+found'  /localdisk/ genesis:/localdisk/ ; /bin/rm -rf ${LOCKx}-genesis ) &
+#
+        ( [[ ! -f ${LOCKx}-nautilus ]] &&  /usr/bin/touch ${LOCKx}-nautilus ; /usr/bin/rsync -avxzHAWXS --numeric-ids --delete --exclude 'swapfile' --exclude 'docker' --exclude 'lost+found'  /localdisk/ nautilus:/localdisk/ ; /bin/rm -rf ${LOCKx}-nautilus ) &
+#
+        ( [[ ! -f ${LOCKx}-master ]] &&  /usr/bin/touch ${LOCKx}-master ; /usr/bin/rsync -avxzHAWXS --numeric-ids --delete --exclude 'swapfile' --exclude 'docker' --exclude 'lost+found'  /localdisk/ master:/localdisk/ ; /bin/rm -rf ${LOCKx}-master ) &
+#
+	wait
+	/bin/rm -rf ${LOCKx}
+    }
+
+echo '############# backup dev home ################'
+    [[ ! -f ${LOCKx} ]] && backupRemotedisk
+echo "------------:" $(date) ":------------"

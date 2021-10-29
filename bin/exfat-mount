@@ -1,0 +1,1 @@
+sudo mount -t exfat -o uid=alex,gid=alex /dev/sda3 /exfat

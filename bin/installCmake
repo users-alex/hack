@@ -1,0 +1,5 @@
+[ ! -d cmake ] && git clone https://gitlab.kitware.com/cmake/cmake
+cd cmake
+mkdir -p cmake-build && cd cmake-build
+../bootstrap && make
+

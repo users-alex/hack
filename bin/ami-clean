@@ -1,0 +1,45 @@
+#!/bin/bash
+
+ACCOUNT_ID="337087806926"
+[ ! -z $1 ] && ACCOUNT_ID=$1
+AMI_NAME="nautilus"
+#
+declare -a AWS_DEPLOY_REGIONS=("eu-north-1"
+        "ap-south-1"
+        "eu-west-3"
+        "eu-west-2"
+        "eu-west-1"
+        "ap-northeast-2"
+        "me-south-1"
+        "ap-northeast-1" 
+        "sa-east-1" 
+        "ca-central-1" 
+        "ap-east-1" 
+        "ap-southeast-1" 
+        "ap-southeast-2"
+        "eu-central-1"
+        "us-east-1"
+        "us-east-2"
+        "us-west-1"
+        "us-west-2")
+#
+deleteAMI() {
+  echo "######### cleaning region $REGION ############"
+  images_to_deregister=`aws ec2 describe-images --owners ${ACCOUNT_ID} --region ${REGION} --filters "Name=name,Values=${AMI_NAME}*" --query 'sort_by(Images, &CreationDate)[].ImageId' | tr -d '[]",'`
+  snapshots_to_delete=`aws ec2 describe-snapshots --owner-ids ${ACCOUNT_ID} --region ${REGION} --filters "Name=tag:Universe,Values=nautilus"    --query 'Snapshots[*].SnapshotId' | tr -d '[]",'`
+  #
+  for image in $images_to_deregister; do
+    echo "deregistering AMI --> $REGION : $image" # ami-08e277f2812b3af54
+    aws ec2 deregister-image --region ${REGION} --image-id ${image}
+  done
+  for snap in $snapshots_to_delete; do
+    echo "deleting SNAP --> $REGION : $snap" # snap-02e3c38a4181cdffe
+    aws ec2 delete-snapshot --region ${REGION} --snapshot-id ${snap} &
+  done
+}
+####
+for REGION in "${AWS_DEPLOY_REGIONS[@]}"
+do
+  deleteAMI &
+done
+

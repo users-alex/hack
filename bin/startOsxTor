@@ -1,0 +1,6 @@
+[ ! -f /usr/local/etc/tor/torrc ] && cp "$HOME/bin/torrc" /usr/local/etc/tor/torrc
+[ ! -d /var/log/tor ] && mkdir -p /var/log/tor
+[ ! -d /var/run/tor ] && mkdir -p /var/run/tor
+chown $(id -u):$(id -g) /var/run/tor
+[ -x /usr/local/bin/tor ] && [ -f /usr/local/etc/tor/torrc ] && /usr/local/bin/tor -f /usr/local/etc/tor/torrc
+[ -S /var/run/tor/control ] && chmod 666 /var/run/tor/control

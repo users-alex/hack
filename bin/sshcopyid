@@ -1,0 +1,130 @@
+#!/bin/bash
+# WF 2017-08-25
+# check ssh access to bitplan servers
+
+#ansi colors
+#http://www.csc.uvic.ca/~sae/seng265/fall04/tips/s265s047-tips/bash-using-colors.html
+blue='\033[0;34m'  
+red='\033[0;31m'  
+green='\033[0;32m' # '\e[1;32m' is too bright for white bg.
+endColor='\033[0m'
+
+#
+# a colored message 
+#   params:
+#     1: l_color - the color of the message
+#     2: l_msg - the message to display
+#
+color_msg() {
+  local l_color="$1"
+  local l_msg="$2"
+  echo -e "${l_color}$l_msg${endColor}"
+}
+
+#
+# error
+#
+#   show an error message and exit
+#
+#   params:
+#     1: l_msg - the message to display
+error() {
+  local l_msg="$1"
+  # use ansi red for error
+  color_msg $red "Error: $l_msg" 1>&2
+  exit 1
+}
+
+#
+# show the usage
+#
+usage() {
+  echo "usage: $0 domain sites"
+  exit 1 
+}
+
+#
+# check the given server
+#
+checkserver() {
+  local l_server="$1"
+  grep $l_server $sconfig > /dev/null
+  if [ $? -eq 1 ]
+  then
+    color_msg $blue "adding $l_server to $sconfig"
+    today=$(date "+%Y-%m-%d")
+    echo "# added $today by $0"  >> $sconfig
+    echo "Host $l_server" >> $sconfig
+    echo "   StrictHostKeyChecking no" >> $sconfig
+    echo "   userKnownHostsFile=/dev/null" >> $sconfig
+    echo "" >> $sconfig
+  else
+    color_msg $green "$l_server found in $sconfig"
+  fi
+  ssh -q $l_server id > /dev/null
+  if [ $? -eq 0 ]
+  then
+    color_msg $green "$l_server accessible via ssh"
+  else
+    color_msg $red "ssh to $l_server failed" 
+    color_msg $blue "shall I ssh-copy-id credentials to $l_server?"
+    read answer
+    case $answer in
+      y|yes) ssh-copy-id $l_server
+    esac
+  fi
+}
+
+#
+# check all servers
+#
+checkservers() {
+me=$(hostname -f)
+for server in $(echo $* | sort)
+do
+  os=`uname`
+  case $os in
+   # Mac OS X
+   Darwin*)
+     pingoption=" -t1";;
+    *) ;;
+  esac
+
+  pingresult=$(ping $pingoption -i0.2 -c1 $server)
+  echo $pingresult | grep 100 > /dev/null
+  if [ $? -eq 1 ]
+  then 
+    checkserver $server
+    checkserver $server.$domain
+  else
+    color_msg $red "ping to $server failed"
+  fi
+done
+}
+
+#
+# check configuration
+#
+checkconfig() {
+#https://askubuntu.com/questions/87449/how-to-disable-strict-host-key-checking-in-ssh
+  if [ -f $sconfig ]
+  then
+    color_msg $green "$sconfig exists"
+    ls -l $sconfig
+  fi
+}
+
+sconfig=~/.ssh/config
+
+case  $# in
+  0) usage ;;
+  1) usage ;;
+  *) 
+    domain=$1 
+    shift 
+    color_msg $blue "checking ssh configuration for domain $domain sites $*"
+    checkconfig
+    checkservers $* 
+    ;;
+esac
+

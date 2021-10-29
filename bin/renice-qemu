@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+#declare -a NICEJOBS
+NICEJOBS=( qemu node python index.js )
+for JOB in ${NICEJOBS[@]}; do
+#  echo "$JOB - renice"
+  ps -ef | awk "/$JOB/ { print \$2 }" | xargs sudo renice -n 20 -p 
+done
+

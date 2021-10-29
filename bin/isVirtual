@@ -1,0 +1,26 @@
+#!/bin/bash
+##########
+PWD=`pwd`
+DATE=`date -u +"%Y%m%d-%H%M%S"`
+##########
+checkVirtual() {
+  echo "###################### virtualServer ##########################"
+  lshw -class system
+  systemd-detect-virt
+  dmidecode
+}
+installPrereq() {
+  sudo apt update &&\
+  sudo apt install -yq \
+    dmidecode facter lshw imvirt virt-what inxi
+}
+#
+[ ! -x /usr/bin/inxi ] && installPrereq
+#
+sudo inxi -b
+sudo virt-what
+sudo imvirt
+sudo lshw -class system | grep product
+sudo facter virtual
+sudo dmidecode -s system-product-name
+#

@@ -1,0 +1,2 @@
+sudo apt install -y distccmon-gnome ccache distcc-pump dmucs python3-dev libiberty-dev distcc
+echo 'edit /etc/default/distcc then service restart distcc

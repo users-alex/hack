@@ -1,0 +1,6 @@
+#!/bin/sh
+sudo xhost +si:localuser:lightdm # creates a user 'lightdm'
+sudo su lightdm -s /bin/bash <<HERE # lightdm stops dpms from HERE
+	/usr/bin/xset -dpms
+	exit
+HERE # and stops at this HERE

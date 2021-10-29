@@ -1,24 +1,43 @@
 #
 # tahoe-lafs : https://github.com/tahoe-lafs/tahoe-lafs
 #
-HOSTNAME="home.alex2006hw.com"
+HOSTNAME="$(cat /etc/hostname).nautilusly.com"
 DATADIR="$HOME/tahoe"
 #
+USER="$(id -u)"
+GROUP="$(id -g)"
+#
+[ -d /usr/local/lib/python2.7/dist-packages ] && sudo chmod -R 777 /usr/local/lib/python2.7/dist-packages
+[ -f /usr/local/lib/python2.7/dist-packages/allmydata/crypto/rsa.py ] && (
+    sed -i 's/public_exponent=17/public_exponent=3/g' /usr/local/lib/python2.7/dist-packages/allmydata/crypto/rsa.py
+)
+#
+# Start up introducer to get a new INVITATION
+#
 [ ! -d "$DATADIR/introducer" ] && mkdir -p "$DATADIR/introducer" && \
-  tahoe create-introducer --location="tcp:$HOSTNAME:9000" --port="tcp:9000" --basedir="$DATADIR/introducer" && \
-  tahoe start "$DATADIR/introducer" 
+  tahoe create-introducer --location="tcp:$HOSTNAME:7004" --port="tcp:7004" --basedir="$DATADIR/introducer" && \
+  tahoe start "$DATADIR/introducer"
 INTRODUCER=$(cat "$DATADIR/introducer/private/introducer.furl")
+echo "make sure to use IP address for $DATADIR/introducer/private/introducer.furl"
 echo "INVITATION : $INTRODUCER"
-[ ! -d "$DATADIR/node" ] && mkdir -p "$DATADIR/node" && \
-  tahoe create-node --location="tcp:$HOSTNAME:8889" --port="tcp:8889" \
+#
+# start up a data node
+#
+[ -d "$DATADIR/node" ] && tahoe run "$DATADIR/node" && exit
+[ ! -d "$DATADIR/node" ] && mkdir -p "$DATADIR/node"
+#
+tahoe create-node --location="tcp:$HOSTNAME:7005" --port="tcp:7005" \
     --introducer="$INTRODUCER" \
-    --webport=8888 --basedir="$DATADIR/node" --shares-needed=2 --shares-happy=2 --shares-total=2 && \
-  sed -i '' "s/nickname\ =/nickname=$HOSTNAME/g" "$DATADIR/node/tahoe.cfg"  && tahoe run "$DATADIR/node" &
+    --basedir="$DATADIR/node" --shares-needed=1 --shares-happy=1 --shares-total=1 && \
+  sed -i "s/nickname\ =/nickname=$HOSTNAME/g" "$DATADIR/node/tahoe.cfg"  && tahoe run "$DATADIR/node" &
 
-exit
+echo "update config if needed at $DATADIR/node/tahoe.cfg then restart node"
 
-# OSX version os sed needs ''
+#
+# start up a web client
+#
 [ ! -d "$DATADIR/client" ] && mkdir -p "$DATADIR/client" && \
   tahoe create-client --webport=8888 --introducer="$INTRODUCER" \
-    --basedir="$DATADIR/client" --shares-needed=2 --shares-happy=2 --shares-total=2 && \
-  sed -i '' "s/nickname\ =/nickname=$HOSTNAME/g" "$DATADIR/client/tahoe.cfg" && tahoe run "$DATADIR/client" &
+    --basedir="$DATADIR/client" --shares-needed=1 --shares-happy=1 --shares-total=1 && \
+  sed -i "s/nickname\ =/nickname=$HOSTNAME/g" "$DATADIR/client/tahoe.cfg" && tahoe run "$DATADIR/client" &
+
